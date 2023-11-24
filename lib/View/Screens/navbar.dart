@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Core/Theme/colors.dart';
 import '../../Core/Theme/style_manager.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -38,14 +39,17 @@ class _NavBarState extends State<NavBar> {
         leading: Container(
           padding: const EdgeInsets.all(6.0),
           width: Get.width * 0.135,
-          child: Image.asset(bannerIc),
+          child: Image.asset(
+            headerIc,
+            color: ColorManager.primaryC,
+          ),
         ),
         actions: [
           Builder(
             builder: (context) => IconButton(
               icon: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Image.asset('assets/icons/drawerb.png'),
+                child: Image.asset(drawerIc),
               ),
               onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
@@ -56,16 +60,21 @@ class _NavBarState extends State<NavBar> {
         child: SizedBox(),
       ),
       body: pages[_selectedIndex],
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(30),
-          topLeft: Radius.circular(30),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: BorderDirectional(
+            top: BorderSide(color: ColorManager.greyC, width: 0.2),
+          ),
         ),
         child: BottomNavigationBar(
           backgroundColor: ColorManager.backgroundColor,
           selectedItemColor: ColorManager.navbarSelected,
           unselectedItemColor: ColorManager.secondaryC,
           type: BottomNavigationBarType.fixed,
+          selectedLabelStyle:
+              const TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
+          unselectedLabelStyle:
+              const TextStyle(fontSize: 10, fontWeight: FontWeight.w100),
           items: const <BottomNavigationBarItem>[
             // BottomNavigationBarItem(
             //   icon: Icon(Ionicons.notifications),
@@ -88,30 +97,80 @@ class _NavBarState extends State<NavBar> {
             //   label: 'الاعدادات',
             // ),
             BottomNavigationBarItem(
-              icon: NavBarItemIcon(imgPath: profileUnactive),
+              icon: NavBarItemIcon(
+                imgPath: profile,
+                color: ColorManager.secondaryC,
+              ),
               label: 'الملف الشخصي',
-              activeIcon: NavBarItemIcon(imgPath: profileActive),
+              activeIcon: NavBarItemIcon(
+                imgPath: profile,
+                color: ColorManager.primaryC,
+              ),
             ),
             BottomNavigationBarItem(
-              icon: NavBarItemIcon(imgPath: notificationUnactive),
+              icon: NavBarItemIcon(
+                imgPath: notifications,
+                color: ColorManager.secondaryC,
+              ),
               label: 'الإشعارات',
-              activeIcon: NavBarItemIcon(imgPath: notificationActive),
+              activeIcon: NavBarItemIcon(
+                imgPath: notifications,
+                color: ColorManager.primaryC,
+              ),
             ),
             BottomNavigationBarItem(
-              icon: NavBarItemIcon(imgPath: homeUnactive),
+              icon: NavBarItemIcon(
+                imgPath: home,
+                color: ColorManager.secondaryC,
+              ),
               label: 'الصفحةالرئيسية',
-              activeIcon: NavBarItemIcon(imgPath: homeActive),
+              activeIcon: NavBarItemIcon(
+                imgPath: home,
+                color: ColorManager.primaryC,
+              ),
             ),
             BottomNavigationBarItem(
-              icon: NavBarItemIcon(imgPath: favoritesUnactive),
+              icon: NavBarItemIcon(
+                imgPath: favorites,
+                color: ColorManager.secondaryC,
+              ),
               label: 'المُفضّلة',
-              activeIcon: NavBarItemIcon(imgPath: favoritesActive),
+              activeIcon: NavBarItemIcon(
+                imgPath: favorites,
+                color: ColorManager.primaryC,
+              ),
             ),
             BottomNavigationBarItem(
-              icon: NavBarItemIcon(imgPath: settingsUnactive),
+              icon: NavBarItemIcon(
+                imgPath: settings,
+                color: ColorManager.secondaryC,
+              ),
               label: 'الإعدادات',
-              activeIcon: NavBarItemIcon(imgPath: settingsActive),
+              activeIcon: NavBarItemIcon(
+                imgPath: settings,
+                color: ColorManager.primaryC,
+              ),
             ),
+            // BottomNavigationBarItem(
+            //   icon: NavBarItemIcon(imgPath: notificationUnactive),
+            //   label: 'الإشعارات',
+            //   activeIcon: NavBarItemIcon(imgPath: notificationActive),
+            // ),
+            // BottomNavigationBarItem(
+            //   icon: NavBarItemIcon(imgPath: homeUnactive),
+            //   label: 'الصفحةالرئيسية',
+            //   activeIcon: NavBarItemIcon(imgPath: homeActive),
+            // ),
+            // BottomNavigationBarItem(
+            //   icon: NavBarItemIcon(imgPath: favoritesUnactive),
+            //   label: 'المُفضّلة',
+            //   activeIcon: NavBarItemIcon(imgPath: favoritesActive),
+            // ),
+            // BottomNavigationBarItem(
+            //   icon: NavBarItemIcon(imgPath: settingsUnactive),
+            //   label: 'الإعدادات',
+            //   activeIcon: NavBarItemIcon(imgPath: settingsActive),
+            // ),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
@@ -125,14 +184,17 @@ class NavBarItemIcon extends StatelessWidget {
   const NavBarItemIcon({
     super.key,
     required this.imgPath,
+    required this.color,
   });
   final String imgPath;
+  final Color color;
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    return SvgPicture.asset(
       imgPath,
       width: 25,
       height: 25,
+      color: color,
     );
   }
 }

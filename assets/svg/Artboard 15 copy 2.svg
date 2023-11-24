@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #4ab017;
+      }
+
+      .cls-3 {
+        font-family: IBMPlexSansArabic-Bold, 'IBM Plex Sans Arabic';
+        font-size: 71.11px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" x="0" y="0" width="512" height="512" rx="256" ry="256"/>
+  <text class="cls-3" transform="translate(94.49 412.65)"><tspan x="0" y="0">تاهاجّّإا</tspan></text>
+  <path class="cls-1" d="m369.18,168.78l-110.54-110.54c-4.91-4.91-12.28-4.91-17.2,0l-110.54,110.54c-4.91,4.91-4.91,12.28,0,17.2l110.54,110.54c4.91,4.91,12.28,4.91,17.2,0l110.54-110.54c4.91-4.91,4.91-12.28,0-17.2Zm-94.18,38.5v-29.51h-49.78v35.56h-24.89v-48.16c0-6.78,5.5-12.28,12.28-12.28h62.38v-30.22l43.56,42.31-43.56,42.31Z"/>
+</svg>

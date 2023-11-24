@@ -1,8 +1,10 @@
 //home page components
 
-const bannerIc = "assets/images/home_banner.png";
-const scope = "assets/icons/scope.png";
-// const searchBarIc = "assets/home/search_bar_ic.png";
+const headerIc = "assets/images/app-header.png";
+const scope = "assets/icons/scope.svg";
+const filter = "assets/icons/filter.svg";
+const testBanner = "assets/images/test_banner.png";
+const drawerIc = "assets/icons/drawerb.png";
 // const sliderBanner = "assets/home/banner_home.png";
 // const notificationIc = "assets/home/notifications_icon.png";
 // const appLogo = "assets/rafeeqi_logo.png";
@@ -35,3 +37,10 @@ const profileActive = "assets/navbar/active/profile_nav_active.png";
 const homeActive = "assets/navbar/active/main_nav_active.png";
 const favoritesActive = "assets/navbar/active/favorite_nav_active.png";
 const settingsActive = "assets/navbar/active/settings_nav_active.png";
+
+//svg ==> bottom bar
+const notifications = "assets/navbar/active/notifications-selected.svg";
+const profile = "assets/navbar/active/profile-selected.svg";
+const home = "assets/navbar/active/home-selected.svg";
+const favorites = "assets/navbar/active/fav-selected.svg";
+const settings = "assets/navbar/active/settings_selected.svg";

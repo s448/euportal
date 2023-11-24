@@ -9,7 +9,7 @@ class AppCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BannerCarousel(
+    return BannerCarousel.fullScreen(
       height: Get.height * 0.15,
       banners: listBanners,
       customizedIndicators: const IndicatorModel.animation(
@@ -26,7 +26,7 @@ class AppCarousel extends StatelessWidget {
 }
 
 List<BannerModel> listBanners = [
-  BannerModel(imagePath: bannerIc, id: '1', boxFit: BoxFit.fill),
-  BannerModel(imagePath: bannerIc, id: '2', boxFit: BoxFit.fill),
-  BannerModel(imagePath: bannerIc, id: '3', boxFit: BoxFit.fill),
+  BannerModel(imagePath: testBanner, id: '1', boxFit: BoxFit.fill),
+  BannerModel(imagePath: testBanner, id: '2', boxFit: BoxFit.fill),
+  BannerModel(imagePath: testBanner, id: '3', boxFit: BoxFit.fill),
 ];

@@ -4,6 +4,7 @@ import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/View/Widgets/carousel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:eup/Core/Theme/colors.dart';
 
@@ -72,7 +73,8 @@ class HomePage extends StatelessWidget {
                                     SizedBox(
                                       width: 20,
                                       height: 20,
-                                      child: Image.asset(scope),
+                                      child: SvgPicture.asset(scope,
+                                          color: ColorManager.primaryC),
                                     ),
                                     const SizedBox(width: 3),
                                     const Text(
@@ -119,7 +121,8 @@ class HomePage extends StatelessWidget {
                                     SizedBox(
                                       width: 20,
                                       height: 20,
-                                      child: Image.asset(scope),
+                                      child: SvgPicture.asset(filter,
+                                          color: ColorManager.primaryC),
                                     ),
                                     const SizedBox(width: 3),
                                     const Text(
@@ -166,11 +169,14 @@ class HomePage extends StatelessWidget {
                           SizedBox(
                             width: 20,
                             height: 20,
-                            child: Image.asset(scope),
+                            child: SvgPicture.asset(
+                              filter,
+                              color: ColorManager.primaryC,
+                            ),
                           ),
                           const SizedBox(width: 3),
                           const Text(
-                            'المدينة',
+                            'قائمة التصنيفات',
                             style: StyleManager.hintStyle,
                           ),
                         ],

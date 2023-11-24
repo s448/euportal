@@ -16,6 +16,7 @@ dependencies:
   get: ^4.6.6
   change_app_package_name: ^1.1.0
   banner_carousel: ^1.2.1
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +33,7 @@ flutter:
     - assets/images/
     - assets/navbar/active/
     - assets/navbar/unactive/
+    - assets/svg/
 
   fonts:
     - family: font

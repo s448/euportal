@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f0eff4;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-3 {
+        isolation: isolate;
+      }
+
+      .cls-4 {
+        opacity: .8;
+      }
+
+      .cls-2 {
+        fill: #3b3b3b;
+      }
+
+      .cls-5 {
+        mix-blend-mode: overlay;
+        opacity: .9;
+      }
+    </style>
+  </defs>
+  <g class="cls-3">
+    <g id="Layer_1" data-name="Layer 1">
+      <g>
+        <g class="cls-5">
+          <rect class="cls-2" x="-.04" width="512.08" height="512" rx="62.04" ry="62.04"/>
+        </g>
+        <g class="cls-4">
+          <path class="cls-1" d="m220.74,351.4h0c-6.61,0-12.86-2.42-17.48-7.2l-70.9-70.75c-9.55-9.77-9.55-25.35,0-35.12,9.77-9.77,25.5-9.77,35.19,0l53.19,53.12,123.65-123.57c9.76-9.7,25.49-9.7,35.19,0,9.63,9.62,9.63,25.42,0,35.12l-141.13,141.2c-4.7,4.78-11.1,7.2-17.71,7.2Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
