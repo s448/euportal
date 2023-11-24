@@ -3,7 +3,7 @@ import 'package:eup/Core/Theme/colors.dart';
 import 'font_sizes.dart';
 
 class StyleManager {
-  static const font = "cairo";
+  static const font = "font";
 
   static final themeManager = ThemeData(
     splashColor: Colors.transparent,
@@ -30,9 +30,20 @@ class StyleManager {
     height: 1.4,
   );
 
-  static const TextStyle whiteStyle = TextStyle(
-    color: ColorManager.forgroundColor,
+  static const TextStyle bodyStyle = TextStyle(
+    color: ColorManager.textC,
+    fontFamily: font,
+    fontSize: 14,
+  );
+
+  static const TextStyle hintStyle = TextStyle(
+    color: ColorManager.greyC,
     fontFamily: font,
     fontSize: 12,
+  );
+
+  static BoxDecoration dropDownButtonDecoration = BoxDecoration(
+    color: ColorManager.containerBackgroundC,
+    borderRadius: BorderRadius.circular(10),
   );
 }

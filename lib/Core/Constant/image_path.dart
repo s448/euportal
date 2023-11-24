@@ -1,11 +1,11 @@
 //home page components
 
-const bannerIc = "assets/home/banner_home.png";
-const searchIc = "assets/home/search_icon.png";
-const searchBarIc = "assets/home/search_bar_ic.png";
-const sliderBanner = "assets/home/banner_home.png";
-const notificationIc = "assets/home/notifications_icon.png";
-const appLogo = "assets/rafeeqi_logo.png";
+const bannerIc = "assets/images/home_banner.png";
+const scope = "assets/icons/scope.png";
+// const searchBarIc = "assets/home/search_bar_ic.png";
+// const sliderBanner = "assets/home/banner_home.png";
+// const notificationIc = "assets/home/notifications_icon.png";
+// const appLogo = "assets/rafeeqi_logo.png";
 
 //sections
 // const testIllustration = "assets/home/test.png";

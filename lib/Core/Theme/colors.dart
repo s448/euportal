@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 class ColorManager {
   // home colors
   static const backgroundColor = Colors.white;
-  static const cardImageBackground = Color.fromRGBO(34, 37, 55, 1);
-  static const forgroundColor = Colors.white38;
+  static const primaryC = Color.fromRGBO(74, 176, 23, 1);
+  static const secondaryC = Color.fromRGBO(33, 36, 54, 1);
+  static const yellowC = Color.fromRGBO(215, 207, 0, 1);
+  static const blueC = Color.fromRGBO(26, 115, 232, 1);
+  static const greyC = Color.fromRGBO(33, 36, 54, 0.5);
+  static const textC = Color.fromRGBO(33, 36, 54, 1);
+  static const containerBackgroundC = Color.fromRGBO(89, 38, 255, 0.1);
 
   // //sections colors
   static const navbarSelected = Colors.green;

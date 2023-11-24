@@ -35,30 +35,25 @@ class _NavBarState extends State<NavBar> {
         ),
         centerTitle: false,
         elevation: 0.0,
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.only(right: 6.0),
-        //     child: Drawer(
-        //       backgroundColor: ColorManager.backgroundColor,
-        //       child: Container(
-        //         padding: const EdgeInsets.all(6.0),
-        //         child: Image.asset(
-        //           "assets/icons/drawerb.png",
-        //           // height: 22,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ],
         leading: Container(
           padding: const EdgeInsets.all(6.0),
           width: Get.width * 0.135,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: ColorManager.forgroundColor)),
-          child: Image.asset("assets/images/app_logo.png"),
+          child: Image.asset(bannerIc),
         ),
-        // leadingWidth: Get.width * 0.145,
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Image.asset('assets/icons/drawerb.png'),
+              ),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+            ),
+          )
+        ],
+      ),
+      endDrawer: const Drawer(
+        child: SizedBox(),
       ),
       body: pages[_selectedIndex],
       bottomNavigationBar: ClipRRect(
@@ -69,7 +64,7 @@ class _NavBarState extends State<NavBar> {
         child: BottomNavigationBar(
           backgroundColor: ColorManager.backgroundColor,
           selectedItemColor: ColorManager.navbarSelected,
-          unselectedItemColor: ColorManager.forgroundColor,
+          unselectedItemColor: ColorManager.secondaryC,
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             // BottomNavigationBarItem(
@@ -93,28 +88,28 @@ class _NavBarState extends State<NavBar> {
             //   label: 'الاعدادات',
             // ),
             BottomNavigationBarItem(
-              icon: NavBarItemIcon(imgPath: notificationUnactive),
-              label: 'الاشعارات',
-              activeIcon: NavBarItemIcon(imgPath: notificationActive),
-            ),
-            BottomNavigationBarItem(
               icon: NavBarItemIcon(imgPath: profileUnactive),
               label: 'الملف الشخصي',
               activeIcon: NavBarItemIcon(imgPath: profileActive),
             ),
             BottomNavigationBarItem(
+              icon: NavBarItemIcon(imgPath: notificationUnactive),
+              label: 'الإشعارات',
+              activeIcon: NavBarItemIcon(imgPath: notificationActive),
+            ),
+            BottomNavigationBarItem(
               icon: NavBarItemIcon(imgPath: homeUnactive),
-              label: 'الرئيسية',
+              label: 'الصفحةالرئيسية',
               activeIcon: NavBarItemIcon(imgPath: homeActive),
             ),
             BottomNavigationBarItem(
               icon: NavBarItemIcon(imgPath: favoritesUnactive),
-              label: 'المفضلة',
+              label: 'المُفضّلة',
               activeIcon: NavBarItemIcon(imgPath: favoritesActive),
             ),
             BottomNavigationBarItem(
               icon: NavBarItemIcon(imgPath: settingsUnactive),
-              label: 'الاعدادات',
+              label: 'الإعدادات',
               activeIcon: NavBarItemIcon(imgPath: settingsActive),
             ),
           ],
@@ -143,9 +138,9 @@ class NavBarItemIcon extends StatelessWidget {
 }
 
 var pages = <Widget>[
-  const NotificationsPage(),
   const ProfilePage(),
-  const HomePage(),
+  const NotificationsPage(),
+  HomePage(),
   const FavoritesPage(),
   const SettingsPage(),
 ];
