@@ -1,18 +1,45 @@
+// ignore_for_file: invalid_use_of_protected_member
+
+import 'dart:developer';
+
+import 'package:eup/BusinessLogic/Services/Implementation/home_page_services.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_home_page_services.dart';
+import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
+import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
-  IhomePageServices? _services;
+  RxList<Category> categories = RxList<Category>();
+  RxList<Region> regions = RxList<Region>();
+
+  // RxList<String> countries = RxList();
+  // RxList<String> cities = RxList();
+  // RxList<String> categoriesTitle = RxList();
+
+  @override
+  void onInit() async {
+    categories.value = await getCategories();
+    regions.value = await getRegions();
+    super.onInit();
+  }
+
+  final IhomePageServices _services = HomePageServices();
 
   final RxString _country = ''.obs;
   final RxString _city = ''.obs;
   final RxString _category = ''.obs;
-
-  List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  final Rx<Region> selectedRegion = Rx<Region>(Region());
 
   //setters for filters
   void setCountry(String? newValue) {
+    setRegion(newValue ?? "");
     _country.value = newValue ?? "";
+  }
+
+  void setRegion(String? newValue) {
+    selectedRegion.value =
+        regions.where((region) => region.country == newValue).first;
+    log(selectedRegion.value.cities!.first.toString());
   }
 
   void setCity(String? newValue) {
@@ -23,6 +50,8 @@ class HomePageController extends GetxController {
     _category.value = newValue ?? "";
   }
 
+  clearCity() => _city.value = '';
+
   //getters for filters
   RxString getCountry() => _country;
 
@@ -31,7 +60,15 @@ class HomePageController extends GetxController {
   RxString getCategory() => _category;
 
   //services
-  getSearchResults(String q) async {
-    return _services?.getSearchResult(q);
+  // getSearchResults(String q) async {
+  //   return _services?.getSearchResult(q);
+  // }
+
+  Future<List<Category>> getCategories() {
+    return _services.getSearchCategories();
+  }
+
+  Future<List<Region>> getRegions() {
+    return _services.getRegions();
   }
 }

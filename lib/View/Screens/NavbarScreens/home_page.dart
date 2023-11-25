@@ -1,6 +1,10 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
+import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
+import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
 import 'package:eup/View/Widgets/carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,20 +24,19 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            InkWell(
-              onTap: () => print(homeCtrl.getSearchResults("q")),
-              child: const Text(
-                "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
-                style: TextStyle(
-                  color: ColorManager.textC,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
+              style: TextStyle(
+                color: ColorManager.textC,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 6),
             SizedBox(width: Get.width, child: const AppCarousel()),
             const SizedBox(height: 20),
+
+            ///the city and country selection
             Container(
               decoration: StyleManager.dropDownButtonDecoration,
               child: Directionality(
@@ -55,15 +58,17 @@ class HomePage extends StatelessWidget {
                                     ? null
                                     : homeCtrl.getCountry().value,
                                 onChanged: (String? newValue) {
+                                  homeCtrl.clearCity();
                                   homeCtrl.setCountry(newValue);
                                 },
                                 style: StyleManager.bodyStyle,
-                                items: homeCtrl.options.map((String option) {
+                                items:
+                                    homeCtrl.regions.value.map((Region region) {
                                   return DropdownMenuItem<String>(
-                                    value: option,
+                                    value: region.country.toString(),
                                     child: Padding(
                                       padding: const EdgeInsets.all(3.0),
-                                      child: Text(option),
+                                      child: Text(region.country.toString()),
                                     ),
                                   );
                                 }).toList(),
@@ -109,12 +114,13 @@ class HomePage extends StatelessWidget {
                                   homeCtrl.setCity(newValue);
                                 },
                                 style: StyleManager.bodyStyle,
-                                items: homeCtrl.options.map((String option) {
+                                items: homeCtrl.selectedRegion.value.cities
+                                    ?.map((String? city) {
                                   return DropdownMenuItem<String>(
-                                    value: option,
+                                    value: city,
                                     child: Padding(
                                       padding: const EdgeInsets.all(3.0),
-                                      child: Text(option),
+                                      child: Text(city.toString()),
                                     ),
                                   );
                                 }).toList(),
@@ -157,10 +163,10 @@ class HomePage extends StatelessWidget {
                         homeCtrl.setCategory(newValue);
                       },
                       style: StyleManager.bodyStyle,
-                      items: homeCtrl.options.map((String option) {
+                      items: homeCtrl.categories.value.map((Category category) {
                         return DropdownMenuItem<String>(
-                          value: option,
-                          child: Text(option),
+                          value: category.title,
+                          child: Text(category.title.toString()),
                         );
                       }).toList(),
                       hint: Row(
