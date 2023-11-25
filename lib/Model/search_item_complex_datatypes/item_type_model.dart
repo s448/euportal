@@ -1,10 +1,10 @@
-class ItemType {
+class Category {
   String? title;
   String? id;
 
-  ItemType({this.title, this.id});
+  Category({this.title, this.id});
 
-  ItemType.fromJson(Map<String, dynamic> json) {
+  Category.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     id = json['id'];
   }

@@ -13,7 +13,7 @@ class Item {
   bool? delivery;
   String? workingHours;
   List<Product>? products;
-  ItemType? type;
+  Category? category;
   Region? region;
   ItemLocation? location;
 
@@ -28,7 +28,7 @@ class Item {
     this.products,
     this.region,
     this.spec,
-    this.type,
+    this.category,
     this.workingHours,
   });
 
@@ -48,7 +48,8 @@ class Item {
     phone = json['phone'];
     portrait = json['portrait'];
     spec = json['spec'];
-    type = json['type'] != null ? ItemType.fromJson(json['type']) : null;
+    category =
+        json['category'] != null ? Category.fromJson(json['category']) : null;
     location = json['location'] != null
         ? ItemLocation.fromJson(json['location'])
         : null;
@@ -72,8 +73,8 @@ class Item {
     data['phone'] = phone;
     data['portrait'] = portrait;
     data['spec'] = spec;
-    if (type != null) {
-      data['type'] = type!.toJson();
+    if (category != null) {
+      data['type'] = category!.toJson();
     }
     if (location != null) {
       data['location'] = location!.toJson();
