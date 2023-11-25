@@ -10,7 +10,7 @@ class HomePageServices implements IhomePageServices {
   }
 
   @override
-  Stream<List<Category>> getSearchTypes() {
+  Stream<List<Category>> getSearchCategories() {
     return _firestore.collection('category').snapshots().map(
       (QuerySnapshot snapshot) {
         return snapshot.docs.map((DocumentSnapshot document) {
