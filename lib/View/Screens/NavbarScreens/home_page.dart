@@ -1,8 +1,7 @@
-import 'package:eup/Controller/home_page_controller.dart';
+import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/View/Widgets/carousel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -21,12 +20,15 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const Text(
-              "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
-              style: TextStyle(
-                color: ColorManager.textC,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            InkWell(
+              onTap: () => print(homeCtrl.getSearchResults("q")),
+              child: const Text(
+                "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
+                style: TextStyle(
+                  color: ColorManager.textC,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 6),
@@ -49,9 +51,9 @@ class HomePage extends StatelessWidget {
                                   Icons.keyboard_arrow_down,
                                   color: ColorManager.greyC,
                                 ),
-                                value: homeCtrl.country.value.isEmpty
+                                value: homeCtrl.getCountry().value.isEmpty
                                     ? null
-                                    : homeCtrl.country.value,
+                                    : homeCtrl.getCountry().value,
                                 onChanged: (String? newValue) {
                                   homeCtrl.setCountry(newValue);
                                 },
@@ -100,9 +102,9 @@ class HomePage extends StatelessWidget {
                                   Icons.keyboard_arrow_down,
                                   color: ColorManager.greyC,
                                 ),
-                                value: homeCtrl.city.value.isEmpty
+                                value: homeCtrl.getCity().value.isEmpty
                                     ? null
-                                    : homeCtrl.city.value,
+                                    : homeCtrl.getCity().value,
                                 onChanged: (String? newValue) {
                                   homeCtrl.setCity(newValue);
                                 },
@@ -148,9 +150,9 @@ class HomePage extends StatelessWidget {
                         Icons.keyboard_arrow_down,
                         color: ColorManager.greyC,
                       ),
-                      value: homeCtrl.category.value.isEmpty
+                      value: homeCtrl.getCategory().value.isEmpty
                           ? null
-                          : homeCtrl.city.value,
+                          : homeCtrl.getCategory().value,
                       onChanged: (String? newValue) {
                         homeCtrl.setCategory(newValue);
                       },
