@@ -6,6 +6,7 @@ import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
 import 'package:eup/View/Widgets/carousel.dart';
+import 'package:eup/View/Widgets/portrait_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -50,6 +51,8 @@ class HomePage extends StatelessWidget {
                         width: Get.width * 0.45,
                         child: Obx(() => DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 icon: const Icon(
                                   Icons.keyboard_arrow_down,
                                   color: ColorManager.greyC,
@@ -103,6 +106,8 @@ class HomePage extends StatelessWidget {
                         width: Get.width * 0.45,
                         child: Obx(() => DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 icon: const Icon(
                                   Icons.keyboard_arrow_down,
                                   color: ColorManager.greyC,
@@ -152,6 +157,8 @@ class HomePage extends StatelessWidget {
               decoration: StyleManager.dropDownButtonDecoration,
               child: Obx(() => DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
+                      // isDense: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       icon: const Icon(
                         Icons.keyboard_arrow_down,
                         color: ColorManager.greyC,
@@ -193,6 +200,8 @@ class HomePage extends StatelessWidget {
                     ),
                   )),
             ),
+            const SizedBox(height: 12),
+            Portrait()
           ],
         ),
       ),

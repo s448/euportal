@@ -16,6 +16,9 @@ class Item {
   Category? category;
   Region? region;
   ItemLocation? location;
+  bool? featuredPortrait;
+  bool? featuredLogo;
+  bool? isNew;
 
   Item({
     this.title,
@@ -30,6 +33,9 @@ class Item {
     this.spec,
     this.category,
     this.workingHours,
+    this.featuredLogo,
+    this.featuredPortrait,
+    this.isNew,
   });
 
   Item.fromJson(Map<String, dynamic> json) {
@@ -54,6 +60,9 @@ class Item {
         ? ItemLocation.fromJson(json['location'])
         : null;
     workingHours = json['working_hours'];
+    featuredPortrait = json['featured_portrait'];
+    featuredLogo = json['featured_logo'];
+    isNew = json['is_new'];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,7 +89,9 @@ class Item {
       data['location'] = location!.toJson();
     }
     data['working_hours'] = workingHours;
-
+    data['featured_portrait'] = featuredPortrait;
+    data['featured_logo'] = featuredLogo;
+    data['is_new'] = isNew;
     return data;
   }
 }

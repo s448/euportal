@@ -5,7 +5,8 @@ const scope = "assets/icons/scope.svg";
 const filter = "assets/icons/filter.svg";
 const testBanner = "assets/images/test_banner.png";
 const drawerIc = "assets/icons/drawerb.png";
-// const sliderBanner = "assets/home/banner_home.png";
+const locationIc = "assets/icons/location.svg";
+const newIc = "assets/icons/new.png";
 // const notificationIc = "assets/home/notifications_icon.png";
 // const appLogo = "assets/rafeeqi_logo.png";
 

@@ -12,10 +12,6 @@ class HomePageController extends GetxController {
   RxList<Category> categories = RxList<Category>();
   RxList<Region> regions = RxList<Region>();
 
-  // RxList<String> countries = RxList();
-  // RxList<String> cities = RxList();
-  // RxList<String> categoriesTitle = RxList();
-
   @override
   void onInit() async {
     categories.value = await getCategories();
@@ -60,9 +56,6 @@ class HomePageController extends GetxController {
   RxString getCategory() => _category;
 
   //services
-  // getSearchResults(String q) async {
-  //   return _services?.getSearchResult(q);
-  // }
 
   Future<List<Category>> getCategories() {
     return _services.getSearchCategories();
