@@ -1,13 +1,14 @@
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
+import 'package:eup/Model/search_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class Portrait extends StatelessWidget {
-  const Portrait({super.key});
-
+  const Portrait({super.key, required this.item});
+  final Item item;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -16,7 +17,7 @@ class Portrait extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(4),
             child: GridTile(
               footer: Container(
                 decoration: BoxDecoration(
@@ -28,26 +29,26 @@ class Portrait extends StatelessWidget {
                       Colors.transparent,
                     ],
                   ),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'مطعم شاورما',
-                        style: TextStyle(
+                        item.title ?? "",
+                        style: const TextStyle(
                           color: Colors.white,
                           fontFamily: StyleManager.font,
-                          fontSize: 12,
+                          fontSize: 10,
                         ),
                       ),
                       Row(
                         children: [
                           SizedBox(
-                            width: 10,
-                            height: 10,
+                            width: 9,
+                            height: 9,
                             child: SvgPicture.asset(
                               locationIc,
                               color: ColorManager.yellowC,
@@ -59,7 +60,7 @@ class Portrait extends StatelessWidget {
                           Text(
                             "2.3 كم",
                             style: TextStyle(
-                              fontSize: 8,
+                              fontSize: 6,
                               fontFamily: StyleManager.font,
                               color: ColorManager.yellowC,
                             ),
@@ -67,9 +68,11 @@ class Portrait extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        "لا يتوفر خدمة توصيل",
-                        style: TextStyle(
-                          fontSize: 8,
+                        item.delivery == true
+                            ? "يتوفر خدمة توصيل"
+                            : "لا يتوفر خدمة توصيل",
+                        style: const TextStyle(
+                          fontSize: 6,
                           fontFamily: StyleManager.font,
                           color: ColorManager.yellowC,
                         ),
@@ -79,30 +82,32 @@ class Portrait extends StatelessWidget {
                 ),
               ),
               child: Image.network(
-                'https://firebasestorage.googleapis.com/v0/b/euportal-bb198.appspot.com/o/portrait%2Fportrait.jpg?alt=media&token=f8c8092d-b8ff-4c57-b2a1-99c99d32ea7d',
+                item.portrait ?? "",
                 fit: BoxFit.cover,
               ),
               // Add your content here
             ),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            child: Image.asset(
-              newIc,
-              // color: ColorManager.yellowC,
-              width: 30,
-              height: 30,
-            ),
-          ),
+          item.isNew == true
+              ? Positioned(
+                  top: 0,
+                  left: 0,
+                  child: Image.asset(
+                    newIc,
+                    // color: ColorManager.yellowC,
+                    width: 25,
+                    height: 25,
+                  ),
+                )
+              : const SizedBox(),
           Positioned(
             bottom: 0,
             left: 0,
             child: Image.asset(
-              newIc,
+              arrowIc,
               // color: ColorManager.yellowC,
-              width: 30,
-              height: 30,
+              width: 25,
+              height: 25,
             ),
           ),
         ],

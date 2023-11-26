@@ -7,6 +7,7 @@ const testBanner = "assets/images/test_banner.png";
 const drawerIc = "assets/icons/drawerb.png";
 const locationIc = "assets/icons/location.svg";
 const newIc = "assets/icons/new.png";
+const arrowIc = "assets/icons/arrow.png";
 // const notificationIc = "assets/home/notifications_icon.png";
 // const appLogo = "assets/rafeeqi_logo.png";
 
