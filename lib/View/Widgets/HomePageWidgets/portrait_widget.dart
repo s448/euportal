@@ -1,4 +1,3 @@
-import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
@@ -120,10 +119,10 @@ class Portrait extends StatelessWidget {
 class PortraitStreamBuilder extends StatelessWidget {
   const PortraitStreamBuilder({
     super.key,
-    required this.homeCtrl,
+    required this.stream,
   });
 
-  final HomePageController homeCtrl;
+  final Stream<List<Item>> stream;
 
   @override
   Widget build(BuildContext context) {
@@ -131,19 +130,20 @@ class PortraitStreamBuilder extends StatelessWidget {
       height: Get.height * 0.25,
       width: Get.width,
       child: StreamBuilder(
-        stream: homeCtrl.portratStream,
+        stream: stream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Text('No data available');
+            return const Center(child: Text('لا يوجد نتائج'));
           } else {
             List<Item> items = snapshot.data!;
             return ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: items.length,
+              shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 8),

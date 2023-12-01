@@ -8,7 +8,9 @@ class Region {
   Region.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     country = json['country'];
-    cities = json['cities'].cast<String>();
+    if (json['cities'] != null) {
+      cities = json['cities'].cast<String>();
+    }
   }
 
   Map<String, dynamic> toJson() {

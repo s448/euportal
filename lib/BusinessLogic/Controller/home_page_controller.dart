@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:eup/BusinessLogic/Services/Implementation/home_page_services.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_home_page_services.dart';
+import 'package:eup/Model/carousel_banner_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -26,6 +27,8 @@ class HomePageController extends GetxController {
   final RxString _category = ''.obs;
   final Rx<Region> selectedRegion = Rx<Region>(Region());
 
+  RxBool filterMode = false.obs;
+
   //setters for filters
   void setCountry(String? newValue) {
     setRegion(newValue ?? "");
@@ -43,7 +46,15 @@ class HomePageController extends GetxController {
   }
 
   void setCategory(String? newValue) {
+    filterMode.value = true;
     _category.value = newValue ?? "";
+  }
+
+  resetMode() {
+    filterMode.value = false;
+    _category.value = '';
+    _country.value = '';
+    clearCity();
   }
 
   clearCity() => _city.value = '';
@@ -56,7 +67,6 @@ class HomePageController extends GetxController {
   RxString getCategory() => _category;
 
   //services
-
   Future<List<Category>> getCategories() {
     return _services.getSearchCategories();
   }
@@ -67,6 +77,9 @@ class HomePageController extends GetxController {
 
   final RxList<Item> items = <Item>[].obs;
 
+  Stream<List<CarouselBanner>> get carouselStream => _services.carouselStream();
   Stream<List<Item>> get portratStream => _services.portratStream();
   Stream<List<Item>> get logoStream => _services.logoStream();
+  Stream<List<Item>> get filterStream =>
+      _services.filterStream(_country.value, _city.value, _category.value);
 }

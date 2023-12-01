@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_home_page_services.dart';
+import 'package:eup/Model/carousel_banner_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -58,4 +59,24 @@ class HomePageServices implements IhomePageServices {
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Item.fromJson(doc.data())).toList());
+
+  @override
+  Stream<List<Item>> filterStream(
+          String country, String city, String category) =>
+      FirebaseFirestore.instance
+          .collection('selection')
+          .where('region.country', isEqualTo: country)
+          .where('region.city', isEqualTo: city)
+          .where('category.title', isEqualTo: category)
+          .snapshots()
+          .map((snapshot) =>
+              snapshot.docs.map((doc) => Item.fromJson(doc.data())).toList());
+
+  @override
+  Stream<List<CarouselBanner>> carouselStream() => FirebaseFirestore.instance
+      .collection('carousel')
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => CarouselBanner.fromJson(doc.data()))
+          .toList());
 }

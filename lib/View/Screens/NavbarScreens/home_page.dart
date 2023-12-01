@@ -4,6 +4,7 @@ import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/filter_results_view.dart';
 import 'package:eup/View/Widgets/carousel.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/logo_widget.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/portrait_widget.dart';
@@ -204,16 +205,52 @@ class HomePage extends StatelessWidget {
                   )),
             ),
             const SizedBox(height: 12),
-            const Text(
-              "أفضل الإختيارات",
-              style: StyleManager.bodyStyle,
-            ),
-            const SizedBox(height: 8),
-            //best of portrait
-            PortraitStreamBuilder(homeCtrl: homeCtrl),
-            const SizedBox(height: 8),
-            //best of logo
-            LogoStreamBuilder(homeCtrl: homeCtrl),
+            //choose between two states
+            /// state 1 => if there's no search or fiter params so view the best choices
+            /// state 2 => if the user enters filter params flip to the results view
+            Obx(() {
+              return homeCtrl.filterMode.value
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "بناءاً على النتائج الُمدخلة",
+                              style: StyleManager.bodyStyle,
+                            ),
+                            InkWell(
+                              onTap: () => homeCtrl.resetMode(),
+                              child: const Icon(
+                                Icons.arrow_forward_ios,
+                                color: ColorManager.primaryC,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        FilterResultsView(filterStream: homeCtrl.filterStream),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //best of portrait
+                        const Text(
+                          "أفضل الإختيارات",
+                          style: StyleManager.bodyStyle,
+                        ),
+                        const SizedBox(height: 8),
+                        PortraitStreamBuilder(
+                          stream: homeCtrl.portratStream,
+                        ),
+                        const SizedBox(height: 8),
+                        //best of logo
+                        LogoStreamBuilder(homeCtrl: homeCtrl),
+                      ],
+                    );
+            }),
           ],
         ),
       ),
