@@ -37,7 +37,12 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             //the banner carousel
-            SizedBox(width: Get.width, child: const AppCarousel()),
+            SizedBox(
+              width: Get.width,
+              child: AppCarousel(
+                homePageController: homeCtrl,
+              ),
+            ),
             const SizedBox(height: 20),
 
             ///the city and country selection
