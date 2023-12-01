@@ -76,26 +76,6 @@ class _NavBarState extends State<NavBar> {
           unselectedLabelStyle:
               const TextStyle(fontSize: 10, fontWeight: FontWeight.w100),
           items: const <BottomNavigationBarItem>[
-            // BottomNavigationBarItem(
-            //   icon: Icon(Ionicons.notifications),
-            //   label: 'الاشعارات',
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(Ionicons.person_sharp),
-            //   label: 'الملف الشخصي',
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(Icons.home_outlined),
-            //   label: 'الرئيسية',
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(Ionicons.heart_outline),
-            //   label: 'المفضلة',
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(Ionicons.settings),
-            //   label: 'الاعدادات',
-            // ),
             BottomNavigationBarItem(
               icon: NavBarItemIcon(
                 imgPath: profile,
@@ -151,26 +131,6 @@ class _NavBarState extends State<NavBar> {
                 color: ColorManager.primaryC,
               ),
             ),
-            // BottomNavigationBarItem(
-            //   icon: NavBarItemIcon(imgPath: notificationUnactive),
-            //   label: 'الإشعارات',
-            //   activeIcon: NavBarItemIcon(imgPath: notificationActive),
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: NavBarItemIcon(imgPath: homeUnactive),
-            //   label: 'الصفحةالرئيسية',
-            //   activeIcon: NavBarItemIcon(imgPath: homeActive),
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: NavBarItemIcon(imgPath: favoritesUnactive),
-            //   label: 'المُفضّلة',
-            //   activeIcon: NavBarItemIcon(imgPath: favoritesActive),
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: NavBarItemIcon(imgPath: settingsUnactive),
-            //   label: 'الإعدادات',
-            //   activeIcon: NavBarItemIcon(imgPath: settingsActive),
-            // ),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,

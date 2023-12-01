@@ -82,4 +82,11 @@ class HomePageController extends GetxController {
   Stream<List<Item>> get logoStream => _services.logoStream();
   Stream<List<Item>> get filterStream =>
       _services.filterStream(_country.value, _city.value, _category.value);
+
+  RxInt viewIndex = 0.obs;
+  Item? viewedItem;
+  viewItemDetails(Item item) {
+    viewIndex.value = 1;
+    viewedItem = item;
+  }
 }

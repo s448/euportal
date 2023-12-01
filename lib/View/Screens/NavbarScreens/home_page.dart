@@ -18,247 +18,262 @@ class HomePage extends StatelessWidget {
   final homeCtrl = Get.find<HomePageController>();
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Get.width,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            //header
-            const Text(
-              "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
-              style: TextStyle(
-                color: ColorManager.textC,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 6),
-            //the banner carousel
-            SizedBox(
-              width: Get.width,
-              child: AppCarousel(
-                homePageController: homeCtrl,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            ///the city and country selection
-            Container(
-              decoration: StyleManager.dropDownButtonDecoration,
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        height: 48.0,
-                        width: Get.width * 0.45,
-                        child: Obx(() => DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: ColorManager.greyC,
-                                ),
-                                value: homeCtrl.getCountry().value.isEmpty
-                                    ? null
-                                    : homeCtrl.getCountry().value,
-                                onChanged: (String? newValue) {
-                                  homeCtrl.clearCity();
-                                  homeCtrl.setCountry(newValue);
-                                },
-                                style: StyleManager.bodyStyle,
-                                items:
-                                    homeCtrl.regions.value.map((Region region) {
-                                  return DropdownMenuItem<String>(
-                                    value: region.country.toString(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Text(region.country.toString()),
-                                    ),
-                                  );
-                                }).toList(),
-                                hint: Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: SvgPicture.asset(scope,
-                                          color: ColorManager.primaryC),
-                                    ),
-                                    const SizedBox(width: 3),
-                                    const Text(
-                                      'الدولة',
-                                      style: StyleManager.hintStyle,
-                                    ),
-                                  ],
-                                ),
-                                isExpanded: true,
-                              ),
-                            )),
-                      ),
-                      const VerticalDivider(
-                        color: ColorManager.greyC,
-                        thickness: 0.3,
-                      ),
-                      SizedBox(
-                        height: 48,
-                        width: Get.width * 0.45,
-                        child: Obx(() => DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: ColorManager.greyC,
-                                ),
-                                value: homeCtrl.getCity().value.isEmpty
-                                    ? null
-                                    : homeCtrl.getCity().value,
-                                onChanged: (String? newValue) {
-                                  homeCtrl.setCity(newValue);
-                                },
-                                style: StyleManager.bodyStyle,
-                                items: homeCtrl.selectedRegion.value.cities
-                                    ?.map((String? city) {
-                                  return DropdownMenuItem<String>(
-                                    value: city,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Text(city.toString()),
-                                    ),
-                                  );
-                                }).toList(),
-                                hint: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: SvgPicture.asset(filter,
-                                          color: ColorManager.primaryC),
-                                    ),
-                                    const SizedBox(width: 3),
-                                    const Text(
-                                      'المدينة',
-                                      style: StyleManager.hintStyle,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            //drop down button of categories
-            Container(
-              decoration: StyleManager.dropDownButtonDecoration,
-              child: Obx(() => DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      // isDense: true,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      icon: const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: ColorManager.greyC,
-                      ),
-                      value: homeCtrl.getCategory().value.isEmpty
-                          ? null
-                          : homeCtrl.getCategory().value,
-                      onChanged: (String? newValue) {
-                        homeCtrl.setCategory(newValue);
-                      },
-                      style: StyleManager.bodyStyle,
-                      items: homeCtrl.categories.value.map((Category category) {
-                        return DropdownMenuItem<String>(
-                          value: category.title,
-                          child: Text(category.title.toString()),
-                        );
-                      }).toList(),
-                      hint: Row(
-                        children: [
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: SvgPicture.asset(
-                              filter,
-                              color: ColorManager.primaryC,
-                            ),
-                          ),
-                          const SizedBox(width: 3),
-                          const Text(
-                            'قائمة التصنيفات',
-                            style: StyleManager.hintStyle,
-                          ),
-                        ],
-                      ),
-                      isExpanded: true,
+    return Obx(() {
+      return IndexedStack(
+        index: homeCtrl.viewIndex.value,
+        children: [
+          //home page
+          SizedBox(
+            width: Get.width,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  //header
+                  const Text(
+                    "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
+                    style: TextStyle(
+                      color: ColorManager.textC,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                  )),
-            ),
-            const SizedBox(height: 12),
-            //choose between two states
-            /// state 1 => if there's no search or fiter params so view the best choices
-            /// state 2 => if the user enters filter params flip to the results view
-            Obx(() {
-              return homeCtrl.filterMode.value
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  const SizedBox(height: 6),
+                  //the banner carousel
+                  SizedBox(
+                    width: Get.width,
+                    child: AppCarousel(
+                      homePageController: homeCtrl,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  ///the city and country selection
+                  Container(
+                    decoration: StyleManager.dropDownButtonDecoration,
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const Text(
-                              "بناءاً على النتائج الُمدخلة",
-                              style: StyleManager.bodyStyle,
+                            SizedBox(
+                              height: 48.0,
+                              width: Get.width * 0.45,
+                              child: Obx(() => DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      icon: const Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: ColorManager.greyC,
+                                      ),
+                                      value: homeCtrl.getCountry().value.isEmpty
+                                          ? null
+                                          : homeCtrl.getCountry().value,
+                                      onChanged: (String? newValue) {
+                                        homeCtrl.clearCity();
+                                        homeCtrl.setCountry(newValue);
+                                      },
+                                      style: StyleManager.bodyStyle,
+                                      items: homeCtrl.regions.value
+                                          .map((Region region) {
+                                        return DropdownMenuItem<String>(
+                                          value: region.country.toString(),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(3.0),
+                                            child:
+                                                Text(region.country.toString()),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      hint: Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: SvgPicture.asset(scope,
+                                                color: ColorManager.primaryC),
+                                          ),
+                                          const SizedBox(width: 3),
+                                          const Text(
+                                            'الدولة',
+                                            style: StyleManager.hintStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      isExpanded: true,
+                                    ),
+                                  )),
                             ),
-                            InkWell(
-                              onTap: () => homeCtrl.resetMode(),
-                              child: const Icon(
-                                Icons.arrow_forward_ios,
-                                color: ColorManager.primaryC,
-                              ),
-                            )
+                            const VerticalDivider(
+                              color: ColorManager.greyC,
+                              thickness: 0.3,
+                            ),
+                            SizedBox(
+                              height: 48,
+                              width: Get.width * 0.45,
+                              child: Obx(() => DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      icon: const Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: ColorManager.greyC,
+                                      ),
+                                      value: homeCtrl.getCity().value.isEmpty
+                                          ? null
+                                          : homeCtrl.getCity().value,
+                                      onChanged: (String? newValue) {
+                                        homeCtrl.setCity(newValue);
+                                      },
+                                      style: StyleManager.bodyStyle,
+                                      items: homeCtrl
+                                          .selectedRegion.value.cities
+                                          ?.map((String? city) {
+                                        return DropdownMenuItem<String>(
+                                          value: city,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(3.0),
+                                            child: Text(city.toString()),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      hint: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: SvgPicture.asset(filter,
+                                                color: ColorManager.primaryC),
+                                          ),
+                                          const SizedBox(width: 3),
+                                          const Text(
+                                            'المدينة',
+                                            style: StyleManager.hintStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )),
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        FilterResultsView(filterStream: homeCtrl.filterStream),
-                      ],
-                    )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //best of portrait
-                        const Text(
-                          "أفضل الإختيارات",
-                          style: StyleManager.bodyStyle,
-                        ),
-                        const SizedBox(height: 8),
-                        PortraitStreamBuilder(
-                          stream: homeCtrl.portratStream,
-                        ),
-                        const SizedBox(height: 8),
-                        //best of logo
-                        LogoStreamBuilder(homeCtrl: homeCtrl),
-                      ],
-                    );
-            }),
-          ],
-        ),
-      ),
-    );
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  //drop down button of categories
+                  Container(
+                    decoration: StyleManager.dropDownButtonDecoration,
+                    child: Obx(() => DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            // isDense: true,
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            icon: const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: ColorManager.greyC,
+                            ),
+                            value: homeCtrl.getCategory().value.isEmpty
+                                ? null
+                                : homeCtrl.getCategory().value,
+                            onChanged: (String? newValue) {
+                              homeCtrl.setCategory(newValue);
+                            },
+                            style: StyleManager.bodyStyle,
+                            items: homeCtrl.categories.value
+                                .map((Category category) {
+                              return DropdownMenuItem<String>(
+                                value: category.title,
+                                child: Text(category.title.toString()),
+                              );
+                            }).toList(),
+                            hint: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: SvgPicture.asset(
+                                    filter,
+                                    color: ColorManager.primaryC,
+                                  ),
+                                ),
+                                const SizedBox(width: 3),
+                                const Text(
+                                  'قائمة التصنيفات',
+                                  style: StyleManager.hintStyle,
+                                ),
+                              ],
+                            ),
+                            isExpanded: true,
+                          ),
+                        )),
+                  ),
+                  const SizedBox(height: 12),
+                  //choose between two states
+                  /// state 1 => if there's no search or fiter params so view the best choices
+                  /// state 2 => if the user enters filter params flip to the results view
+                  Obx(() {
+                    return homeCtrl.filterMode.value
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ///reset mode button
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "بناءاً على النتائج الُمدخلة",
+                                    style: StyleManager.bodyStyle,
+                                  ),
+                                  InkWell(
+                                    onTap: () => homeCtrl.resetMode(),
+                                    child: const Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: ColorManager.primaryC,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              FilterResultsView(
+                                  filterStream: homeCtrl.filterStream),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //best of portrait
+                              const Text(
+                                "أفضل الإختيارات",
+                                style: StyleManager.bodyStyle,
+                              ),
+                              const SizedBox(height: 8),
+                              PortraitStreamBuilder(controller: homeCtrl),
+                              const SizedBox(height: 8),
+                              //best of logo
+                              LogoStreamBuilder(homeCtrl: homeCtrl),
+                            ],
+                          );
+                  }),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            child: Text(homeCtrl.viewedItem?.title ?? ""),
+          )
+        ],
+      );
+    });
   }
 }

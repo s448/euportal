@@ -1,3 +1,4 @@
+import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
@@ -59,7 +60,7 @@ class Portrait extends StatelessWidget {
                           ),
                           Text(
                             "2.3 كم",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 6,
                               fontFamily: StyleManager.font,
                               color: ColorManager.yellowC,
@@ -119,10 +120,10 @@ class Portrait extends StatelessWidget {
 class PortraitStreamBuilder extends StatelessWidget {
   const PortraitStreamBuilder({
     super.key,
-    required this.stream,
+    required this.controller,
   });
 
-  final Stream<List<Item>> stream;
+  final HomePageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +131,7 @@ class PortraitStreamBuilder extends StatelessWidget {
       height: Get.height * 0.25,
       width: Get.width,
       child: StreamBuilder(
-        stream: stream,
+        stream: controller.portratStream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -145,10 +146,13 @@ class PortraitStreamBuilder extends StatelessWidget {
               itemCount: items.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Portrait(
-                    item: items[index],
+                return InkWell(
+                  onTap: () => controller.viewItemDetails(items[index]),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Portrait(
+                      item: items[index],
+                    ),
                   ),
                 );
               },
