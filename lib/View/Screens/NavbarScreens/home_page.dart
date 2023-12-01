@@ -1,15 +1,12 @@
 // ignore_for_file: invalid_use_of_protected_member
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
-import 'package:eup/Model/search_item_model.dart';
 import 'package:eup/View/Widgets/carousel.dart';
-import 'package:eup/View/Widgets/logo_widget.dart';
-import 'package:eup/View/Widgets/portrait_widget.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/logo_widget.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/portrait_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -28,6 +25,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
+            //header
             const Text(
               "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
               style: TextStyle(
@@ -37,6 +35,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 6),
+            //the banner carousel
             SizedBox(width: Get.width, child: const AppCarousel()),
             const SizedBox(height: 20),
 
@@ -156,6 +155,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
+            //drop down button of categories
             Container(
               decoration: StyleManager.dropDownButtonDecoration,
               child: Obx(() => DropdownButtonHideUnderline(
@@ -209,72 +209,11 @@ class HomePage extends StatelessWidget {
               style: StyleManager.bodyStyle,
             ),
             const SizedBox(height: 8),
-
-            SizedBox(
-              height: Get.height * 0.25,
-              width: Get.width,
-              child: StreamBuilder(
-                stream: homeCtrl.portratStream,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Text('No data available');
-                  } else {
-                    List<Item> items = snapshot.data!;
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Portrait(
-                            item: items[index],
-                          ),
-                        );
-                      },
-                    );
-                  }
-                },
-              ),
-            ),
+            //best of portrait
+            PortraitStreamBuilder(homeCtrl: homeCtrl),
             const SizedBox(height: 8),
-            SizedBox(
-              height: Get.height * 0.25,
-              width: Get.width,
-              child: StreamBuilder(
-                stream: homeCtrl.logoStream,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Text('No data available');
-                  } else {
-                    List<Item> items = snapshot.data!;
-                    return GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 6,
-                        crossAxisSpacing: 5.0,
-                        mainAxisSpacing: 8.0,
-                        childAspectRatio: 0.7,
-                      ),
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        return LogoGridTile(
-                          item: items[index],
-                        );
-                      },
-                    );
-                  }
-                },
-              ),
-            ),
+            //best of logo
+            LogoStreamBuilder(homeCtrl: homeCtrl),
           ],
         ),
       ),
