@@ -30,10 +30,34 @@ class StyleManager {
     height: 1.4,
   );
 
+  static const TextStyle greenHeadline = TextStyle(
+    fontSize: headlineSize,
+    fontFamily: font,
+    fontWeight: FontWeight.bold,
+    color: ColorManager.primaryC,
+    height: 1.4,
+  );
+
   static const TextStyle bodyStyle = TextStyle(
     color: ColorManager.textC,
     fontFamily: font,
     fontSize: 14,
+  );
+
+  static const TextStyle redTip = TextStyle(
+    color: Colors.red,
+    fontFamily: font,
+    fontSize: 8,
+  );
+
+  static const TextStyle details = TextStyle(
+    color: ColorManager.secondaryC,
+    fontFamily: font,
+    fontSize: 8,
+  );
+  static const TextStyle info = TextStyle(
+    fontSize: 10,
+    color: ColorManager.textC,
   );
 
   static const TextStyle hintStyle = TextStyle(

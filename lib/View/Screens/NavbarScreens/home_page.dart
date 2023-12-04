@@ -3,7 +3,8 @@ import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
-import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
+import 'package:eup/Model/region_model.dart';
+import 'package:eup/View/Screens/NavbarScreens/restaurant_coffee_details_page.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/filter_results_view.dart';
 import 'package:eup/View/Widgets/carousel.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/logo_widget.dart';
@@ -226,23 +227,9 @@ class HomePage extends StatelessWidget {
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ///reset mode button
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    "بناءاً على النتائج الُمدخلة",
-                                    style: StyleManager.bodyStyle,
-                                  ),
-                                  InkWell(
-                                    onTap: () => homeCtrl.resetMode(),
-                                    child: const Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: ColorManager.primaryC,
-                                    ),
-                                  )
-                                ],
+                              const Text(
+                                "بناءاً على النتائج الُمدخلة",
+                                style: StyleManager.bodyStyle,
                               ),
                               const SizedBox(height: 8),
                               FilterResultsView(
@@ -273,113 +260,5 @@ class HomePage extends StatelessWidget {
         ],
       );
     });
-  }
-}
-
-class DetailsPage extends StatelessWidget {
-  const DetailsPage({super.key, required this.controller});
-  final HomePageController controller;
-  @override
-  Widget build(BuildContext context) {
-    final item = controller.viewedItem;
-    return SizedBox(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: SizedBox(
-                    width: Get.width,
-                    height: 110,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
-                        item?.portrait ?? "",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 60),
-                    child: CircleAvatar(
-                      radius: 40.0,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        radius: 38.0,
-                        backgroundImage: NetworkImage(
-                          item?.logo ?? "",
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Text(
-              item?.title ?? "",
-              style: StyleManager.headline,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: SizedBox(
-                width: Get.width,
-                height: Get.height * 0.08,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        const Text(
-                          "الموقع",
-                        ),
-                        Text(
-                          item?.location?.lat ?? "غير محدد",
-                          style: StyleManager.hintStyle,
-                        )
-                      ],
-                    ),
-                    const VerticalDivider(),
-                    Column(
-                      children: [
-                        const Text(
-                          "خدمة التوصيل",
-                          style: TextStyle(),
-                        ),
-                        Text(
-                          item?.delivery == true ? "متوفرة" : "غير متوفرة",
-                          style: StyleManager.hintStyle,
-                        )
-                      ],
-                    ),
-                    const VerticalDivider(),
-                    Column(
-                      children: [
-                        const Text(
-                          "ساعات العمل",
-                        ),
-                        Text(
-                          item?.workingHours ?? "",
-                          style: StyleManager.hintStyle,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const Divider()
-          ],
-        ),
-      ),
-    );
   }
 }

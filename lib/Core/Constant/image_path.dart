@@ -8,6 +8,11 @@ const drawerIc = "assets/icons/drawerb.png";
 const locationIc = "assets/icons/location.svg";
 const newIc = "assets/icons/new.png";
 const arrowIc = "assets/icons/arrow.png";
+const lessonIc = "assets/icons/lessons.svg";
+const womenPrayerIc = "assets/icons/praye_women.svg";
+const prayerIc = "assets/icons/prayer.svg";
+const wodoaIc = "assets/icons/wodoaa.svg";
+
 // const notificationIc = "assets/home/notifications_icon.png";
 // const appLogo = "assets/rafeeqi_logo.png";
 

@@ -1,7 +1,7 @@
 import 'package:eup/Model/search_item_complex_datatypes/item_location_model.dart';
+import 'package:eup/Model/search_item_complex_datatypes/item_region_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/product_model.dart';
-import 'package:eup/Model/search_item_complex_datatypes/region_model.dart';
 
 class Item {
   String? title;
@@ -14,7 +14,7 @@ class Item {
   String? workingHours;
   List<Product>? products;
   Category? category;
-  Region? region;
+  ItemRegion? region;
   ItemLocation? location;
   bool? featuredPortrait;
   bool? featuredLogo;
@@ -57,7 +57,8 @@ class Item {
 
   Item.fromJson(Map<String, dynamic> json) {
     title = json['title'];
-    region = json['region'] != null ? Region.fromJson(json['region']) : null;
+    region =
+        json['region'] != null ? ItemRegion.fromJson(json['region']) : null;
     if (json['products'] != null) {
       products = <Product>[];
       json['products'].forEach((v) {
