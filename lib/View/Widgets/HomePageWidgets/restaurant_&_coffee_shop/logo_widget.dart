@@ -6,32 +6,36 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LogoGridTile extends StatelessWidget {
-  const LogoGridTile({super.key, required this.item});
+  LogoGridTile({super.key, required this.item});
   final Item item;
+  final controller = Get.find<HomePageController>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: SizedBox(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.network(
-                item.logo ?? "",
-                fit: BoxFit.fill,
+    return InkWell(
+      onTap: () => controller.viewItemDetails(item),
+      child: Column(
+        children: [
+          Expanded(
+            child: SizedBox(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.network(
+                  item.logo ?? "",
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
-        ),
-        Text(
-          item.title ?? "",
-          style: const TextStyle(
-            color: ColorManager.textC,
-            fontFamily: StyleManager.font,
-            fontSize: 10,
+          Text(
+            item.title ?? "",
+            style: const TextStyle(
+              color: ColorManager.textC,
+              fontFamily: StyleManager.font,
+              fontSize: 10,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

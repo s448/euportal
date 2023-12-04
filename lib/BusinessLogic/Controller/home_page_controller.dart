@@ -55,6 +55,15 @@ class HomePageController extends GetxController {
 
   isCenterTitle() =>
       viewIndex.value != 0 || getCategory().value != '' ? true : false;
+  getAppTitle() {
+    if (getCategory().value == '' && viewIndex.value == 0) {
+      return 'بوابة الإتحاد الأوروبي';
+    } else if (viewIndex.value == 1) {
+      return "التفاصيل";
+    } else {
+      return 'قائمة ال${getCategory()}';
+    }
+  }
 
   // defineHomePageTitle(){
   //   switch (getCategory().value) {

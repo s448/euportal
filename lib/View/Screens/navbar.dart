@@ -34,9 +34,7 @@ class _NavBarState extends State<NavBar> {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            homeCtrl.getCategory().value != ''
-                ? "قائمة ال${homeCtrl.getCategory()}"
-                : 'بوابة الإتحاد الأوروبي',
+            homeCtrl.getAppTitle(),
             style: StyleManager.headline,
           ),
           centerTitle: homeCtrl.isCenterTitle(),

@@ -35,6 +35,7 @@ class FilterResultsView extends StatelessWidget {
   }
 }
 
+//للمطاعم والكافيهات
 class PortraitGridView extends StatelessWidget {
   const PortraitGridView({
     super.key,
@@ -64,6 +65,7 @@ class PortraitGridView extends StatelessWidget {
   }
 }
 
+//للمساجد والاطباء
 class ItemListView extends StatelessWidget {
   const ItemListView({
     super.key,
