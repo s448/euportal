@@ -8,7 +8,7 @@ class Item {
   String? id;
   String? logo;
   String? portrait;
-  String? spec;
+  String? description;
   String? phone;
   bool? delivery;
   String? workingHours;
@@ -20,6 +20,16 @@ class Item {
   bool? featuredLogo;
   bool? isNew;
 
+  //mosque
+  String? mosqueCapacity;
+  bool? mosqueAblutionFacilities;
+  bool? womenPrayerRoom;
+  bool? lessonAfterEshaa;
+  bool? allPrayers;
+
+  //dr
+  String? fb;
+  String? insta;
   Item({
     this.title,
     required this.id,
@@ -30,12 +40,19 @@ class Item {
     this.portrait,
     this.products,
     this.region,
-    this.spec,
+    this.description,
     this.category,
     this.workingHours,
     this.featuredLogo,
     this.featuredPortrait,
     this.isNew,
+    this.allPrayers,
+    this.lessonAfterEshaa,
+    this.mosqueAblutionFacilities,
+    this.mosqueCapacity,
+    this.womenPrayerRoom,
+    this.fb,
+    this.insta,
   });
 
   Item.fromJson(Map<String, dynamic> json) {
@@ -53,7 +70,7 @@ class Item {
     logo = json['logo'];
     phone = json['phone'];
     portrait = json['portrait'];
-    spec = json['spec'];
+    description = json['description'];
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
     location = json['location'] != null
@@ -63,6 +80,15 @@ class Item {
     featuredPortrait = json['featured_portrait'];
     featuredLogo = json['featured_logo'];
     isNew = json['is_new'];
+
+    mosqueCapacity = json['mosque_capacity'];
+    mosqueAblutionFacilities = json['ablution_facilities'];
+    womenPrayerRoom = json['women_prayer_room'];
+    lessonAfterEshaa = json['lesson_after_ishaa'];
+    allPrayers = json['all_prayers'];
+
+    fb = json['fb'];
+    insta = json['insta'];
   }
 
   Map<String, dynamic> toJson() {
@@ -81,7 +107,7 @@ class Item {
     data['logo'] = logo;
     data['phone'] = phone;
     data['portrait'] = portrait;
-    data['spec'] = spec;
+    data['description'] = description;
     if (category != null) {
       data['type'] = category!.toJson();
     }
@@ -92,6 +118,15 @@ class Item {
     data['featured_portrait'] = featuredPortrait;
     data['featured_logo'] = featuredLogo;
     data['is_new'] = isNew;
+
+    data['mosque_capacity'] = mosqueCapacity;
+    data['ablution_facilities'] = mosqueAblutionFacilities;
+    data['women_prayer_room'] = womenPrayerRoom;
+    data['lesson_after_ishaa'] = lessonAfterEshaa;
+    data['all_prayers'] = allPrayers;
+
+    data['fb'] = fb;
+    data['insta'] = insta;
     return data;
   }
 }
