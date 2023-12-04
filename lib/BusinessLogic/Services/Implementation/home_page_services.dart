@@ -65,9 +65,9 @@ class HomePageServices implements IhomePageServices {
           String country, String city, String category) =>
       FirebaseFirestore.instance
           .collection('selection')
-          .where('region.country', isEqualTo: country)
-          .where('region.city', isEqualTo: city)
-          .where('category.title', isEqualTo: category)
+          // .where('region.country', isEqualTo: country)
+          // .where('region.city', isEqualTo: city)
+          // .where('category.title', isEqualTo: category)
           .snapshots()
           .map((snapshot) =>
               snapshot.docs.map((doc) => Item.fromJson(doc.data())).toList());

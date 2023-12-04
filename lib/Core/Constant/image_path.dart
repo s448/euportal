@@ -12,6 +12,9 @@ const lessonIc = "assets/icons/lessons.svg";
 const womenPrayerIc = "assets/icons/praye_women.svg";
 const prayerIc = "assets/icons/prayer.svg";
 const wodoaIc = "assets/icons/wodoaa.svg";
+const callIc = "assets/icons/call.svg";
+const fbIc = "assets/icons/facebook.svg";
+const instaIc = "assets/icons/instagram.svg";
 
 // const notificationIc = "assets/home/notifications_icon.png";
 // const appLogo = "assets/rafeeqi_logo.png";

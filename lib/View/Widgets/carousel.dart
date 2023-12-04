@@ -1,6 +1,5 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
-import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Model/carousel_banner_model.dart';
 import 'package:eup/Service/url_launch_service.dart';
@@ -56,8 +55,8 @@ class AppCarousel extends StatelessWidget {
   }
 }
 
-List<BannerModel> listBanners = [
-  BannerModel(imagePath: testBanner, id: '1', boxFit: BoxFit.fill),
-  BannerModel(imagePath: testBanner, id: '2', boxFit: BoxFit.fill),
-  BannerModel(imagePath: testBanner, id: '3', boxFit: BoxFit.fill),
-];
+// List<BannerModel> listBanners = [
+//   BannerModel(imagePath: testBanner, id: '1', boxFit: BoxFit.fill),
+//   BannerModel(imagePath: testBanner, id: '2', boxFit: BoxFit.fill),
+//   BannerModel(imagePath: testBanner, id: '3', boxFit: BoxFit.fill),
+// ];

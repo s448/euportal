@@ -7,8 +7,8 @@ import 'package:eup/Model/region_model.dart';
 import 'package:eup/View/Screens/NavbarScreens/restaurant_coffee_details_page.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/filter_results_view.dart';
 import 'package:eup/View/Widgets/carousel.dart';
-import 'package:eup/View/Widgets/HomePageWidgets/logo_widget.dart';
-import 'package:eup/View/Widgets/HomePageWidgets/portrait_widget.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/restaurant_&_coffee_shop/logo_widget.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/restaurant_&_coffee_shop/portrait_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -232,8 +232,7 @@ class HomePage extends StatelessWidget {
                                 style: StyleManager.bodyStyle,
                               ),
                               const SizedBox(height: 8),
-                              FilterResultsView(
-                                  filterStream: homeCtrl.filterStream),
+                              FilterResultsView(controller: homeCtrl),
                             ],
                           )
                         : Column(

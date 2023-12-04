@@ -56,9 +56,7 @@ class StyleManager {
     fontSize: 8,
   );
   static const TextStyle info = TextStyle(
-    fontSize: 10,
-    color: ColorManager.textC,
-  );
+      fontSize: 10, color: ColorManager.textC, fontWeight: FontWeight.w500);
 
   static const TextStyle hintStyle = TextStyle(
     color: ColorManager.greyC,

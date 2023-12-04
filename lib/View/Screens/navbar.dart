@@ -33,11 +33,13 @@ class _NavBarState extends State<NavBar> {
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'بوابة الإتحاد الأوروبي',
+          title: Text(
+            homeCtrl.getCategory().value != ''
+                ? "قائمة ال${homeCtrl.getCategory()}"
+                : 'بوابة الإتحاد الأوروبي',
             style: StyleManager.headline,
           ),
-          centerTitle: homeCtrl.viewIndex.value != 0 ? true : false,
+          centerTitle: homeCtrl.isCenterTitle(),
           elevation: 0.0,
           leading: homeCtrl.viewIndex.value != 0
               ? InkWell(

@@ -50,6 +50,20 @@ class HomePageController extends GetxController {
     _category.value = newValue ?? "";
   }
 
+  isGridView() =>
+      getCategory().value == "مطاعم" || getCategory().value == "مقاهي";
+
+  isCenterTitle() =>
+      viewIndex.value != 0 || getCategory().value != '' ? true : false;
+
+  // defineHomePageTitle(){
+  //   switch (getCategory().value) {
+  //     case "مطاعم":
+  //       return ""
+  //     default:
+  //   }
+  // }
+
   resetMode() {
     viewIndex.value = 0;
     filterMode.value = false;

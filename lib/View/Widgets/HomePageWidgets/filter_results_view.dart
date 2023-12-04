@@ -1,20 +1,21 @@
 import 'dart:developer';
 
+import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Model/search_item_model.dart';
-import 'package:eup/View/Widgets/HomePageWidgets/mosque_item_widget.dart';
-import 'package:eup/View/Widgets/HomePageWidgets/portrait_widget.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/mosque_&_dr/list_tile_item_widget.dart';
+import 'package:eup/View/Widgets/HomePageWidgets/restaurant_&_coffee_shop/portrait_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FilterResultsView extends StatelessWidget {
-  const FilterResultsView({super.key, required this.filterStream});
-  final Stream<List<Item>> filterStream;
+  const FilterResultsView({super.key, required this.controller});
+  final HomePageController controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: Get.width,
       child: StreamBuilder(
-        stream: filterStream,
+        stream: controller.filterStream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -24,7 +25,9 @@ class FilterResultsView extends StatelessWidget {
             return const Center(child: Text('لا يوجد نتائج'));
           } else {
             List<Item> items = snapshot.data!;
-            return MosqueListView(items: items);
+            return controller.isGridView()
+                ? PortraitGridView(items: items)
+                : ItemListView(items: items);
           }
         },
       ),
@@ -61,8 +64,8 @@ class PortraitGridView extends StatelessWidget {
   }
 }
 
-class MosqueListView extends StatelessWidget {
-  const MosqueListView({
+class ItemListView extends StatelessWidget {
+  const ItemListView({
     super.key,
     required this.items,
   });
@@ -77,7 +80,7 @@ class MosqueListView extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         log(items.length.toString());
-        return MosqueItemWidget(
+        return ListTileItemWidget(
           item: items[index],
         );
       },
