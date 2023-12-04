@@ -48,6 +48,7 @@ class HomePageController extends GetxController {
   void setCategory(String? newValue) {
     filterMode.value = true;
     _category.value = newValue ?? "";
+    refresh();
   }
 
   isGridView() =>

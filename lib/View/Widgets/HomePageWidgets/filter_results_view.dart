@@ -12,26 +12,28 @@ class FilterResultsView extends StatelessWidget {
   final HomePageController controller;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Get.width,
-      child: StreamBuilder(
-        stream: controller.filterStream,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('لا يوجد نتائج'));
-          } else {
-            List<Item> items = snapshot.data!;
-            return controller.isGridView()
-                ? PortraitGridView(items: items)
-                : ItemListView(items: items);
-          }
-        },
-      ),
-    );
+    return Obx(() {
+      return SizedBox(
+        width: Get.width,
+        child: StreamBuilder(
+          stream: controller.filterStream,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('لا يوجد نتائج'));
+            } else {
+              List<Item> items = snapshot.data!;
+              return controller.isGridView()
+                  ? PortraitGridView(items: items)
+                  : ItemListView(items: items);
+            }
+          },
+        ),
+      );
+    });
   }
 }
 
