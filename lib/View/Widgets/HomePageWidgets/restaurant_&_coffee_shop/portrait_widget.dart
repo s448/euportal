@@ -71,16 +71,19 @@ class Portrait extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text(
-                          item.delivery == true
-                              ? "يتوفر خدمة توصيل"
-                              : "لا يتوفر خدمة توصيل",
-                          style: const TextStyle(
-                            fontSize: 6,
-                            fontFamily: StyleManager.font,
-                            color: ColorManager.yellowC,
-                          ),
-                        ),
+                        //1 => مطاعم
+                        item.category?.title == "مطاعم"
+                            ? Text(
+                                item.delivery == true
+                                    ? "يتوفر خدمة توصيل"
+                                    : "لا يتوفر خدمة توصيل",
+                                style: const TextStyle(
+                                  fontSize: 6,
+                                  fontFamily: StyleManager.font,
+                                  color: ColorManager.yellowC,
+                                ),
+                              )
+                            : const SizedBox(height: 12),
                       ],
                     ),
                   ),

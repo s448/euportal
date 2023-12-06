@@ -111,12 +111,13 @@ class ListTileItemWidget extends StatelessWidget {
                                       const SizedBox(width: 4),
                                       Expanded(
                                         child: Text(
-                                          "0045464545",
+                                          item.phone ?? "غير متوفر",
                                           style: StyleManager.info,
                                         ),
                                       )
                                     ],
                                   ),
+                                  const SizedBox(height: 4),
                                   Row(
                                     children: [
                                       SvgPicture.asset(

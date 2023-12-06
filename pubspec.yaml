@@ -20,6 +20,8 @@ dependencies:
   firebase_core: ^2.23.0
   cloud_firestore: ^4.13.2
   url_launcher: ^6.2.1
+  haversine_distance: ^1.2.1
+  permission_handler: ^11.1.0
 
 dev_dependencies:
   flutter_test:
