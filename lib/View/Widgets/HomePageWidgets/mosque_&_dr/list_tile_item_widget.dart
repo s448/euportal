@@ -156,7 +156,8 @@ class ListTileItemWidget extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      "المسافة بينك و بين ${item.title} 3 كم",
+                                      "المسافة بينك و بين ${item.title} " +
+                                          "${controller.calculateDistance(item.location?.lat ?? '0.0', item.location?.long ?? '0.0').toStringAsFixed(1)} كم",
                                       style: StyleManager.info,
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
@@ -165,14 +166,25 @@ class ListTileItemWidget extends StatelessWidget {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  Expanded(
-                                    child: Text(
-                                      item.location?.lat ?? "",
-                                      style: StyleManager.info,
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  )
+                                  item.location == null
+                                      ? const SizedBox()
+                                      : Expanded(
+                                          child: FutureBuilder(
+                                          future: controller.getAddress(
+                                            item.location!.lat ?? "0.0",
+                                            item.location!.lat ?? "0.0",
+                                          ),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              return Text(
+                                                snapshot.data ?? "",
+                                                style: StyleManager.info,
+                                              );
+                                            } else {
+                                              return const SizedBox();
+                                            }
+                                          },
+                                        ))
                                 ],
                               )),
                         )

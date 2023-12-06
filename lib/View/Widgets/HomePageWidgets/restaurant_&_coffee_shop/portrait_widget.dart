@@ -6,7 +6,6 @@ import 'package:eup/Model/search_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:haversine_distance/haversine_distance.dart';
 
 class Portrait extends StatelessWidget {
   Portrait({super.key, required this.item});
@@ -62,21 +61,16 @@ class Portrait extends StatelessWidget {
                             const SizedBox(
                               width: 2,
                             ),
-                            Text(
-                              controller
-                                  .calculateDistance(
-                                    Location(
-                                      double.parse(item.location?.lat ?? '0.0'),
-                                      double.parse(item.location?.lat ?? '0.0'),
+                            item.location == null
+                                ? const SizedBox()
+                                : Text(
+                                    "${controller.calculateDistance(item.location?.lat ?? '0.0', item.location?.long ?? '0.0').toStringAsFixed(1)} كم",
+                                    style: const TextStyle(
+                                      fontSize: 6,
+                                      fontFamily: StyleManager.font,
+                                      color: ColorManager.yellowC,
                                     ),
-                                  )
-                                  .toString(),
-                              style: const TextStyle(
-                                fontSize: 6,
-                                fontFamily: StyleManager.font,
-                                color: ColorManager.yellowC,
-                              ),
-                            ),
+                                  ),
                           ],
                         ),
                         //1 => مطاعم

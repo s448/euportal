@@ -41,12 +41,22 @@ class HomePageController extends GetxController {
     currentLocation.value = await _locationService.getLocation();
   }
 
-  double calculateDistance(Location target) {
+  double calculateDistance(String lat, String long) {
+    Location target = Location(
+      double.parse(lat),
+      double.parse(lat),
+    );
     LocationData? myLocationData = currentLocation.value;
     return DistanceCalculator.getDistance(
         Location(
             myLocationData?.latitude ?? 0.0, myLocationData?.longitude ?? 0.0),
         target);
+  }
+
+  Future<String> getAddress(String lat, String long) async {
+    String address = await _locationService.getLocationAddress(
+        double.parse(lat), double.parse(long));
+    return address;
   }
 
   //setters for filters
