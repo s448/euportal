@@ -22,6 +22,7 @@ dependencies:
   url_launcher: ^6.2.1
   haversine_distance: ^1.2.1
   permission_handler: ^11.1.0
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:

@@ -3,11 +3,15 @@
 import 'dart:developer';
 import 'package:eup/BusinessLogic/Services/Implementation/home_page_services.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_home_page_services.dart';
+import 'package:eup/Core/Utils/distance_calculator.dart';
 import 'package:eup/Model/carousel_banner_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/region_model.dart';
 import 'package:eup/Model/search_item_model.dart';
+import 'package:eup/Service/location_service.dart';
 import 'package:get/get.dart';
+import 'package:haversine_distance/haversine_distance.dart';
+import 'package:location/location.dart' hide Location;
 
 class HomePageController extends GetxController {
   RxList<Category> categories = RxList<Category>();
@@ -15,6 +19,7 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() async {
+    await getLocation();
     categories.value = await getCategories();
     regions.value = await getRegions();
     super.onInit();
@@ -28,6 +33,21 @@ class HomePageController extends GetxController {
   final Rx<Region> selectedRegion = Rx<Region>(Region());
 
   RxBool filterMode = false.obs;
+
+  final LocationService _locationService = LocationService();
+  Rx<LocationData?> currentLocation = Rx<LocationData?>(null);
+
+  Future<void> getLocation() async {
+    currentLocation.value = await _locationService.getLocation();
+  }
+
+  double calculateDistance(Location target) {
+    LocationData? myLocationData = currentLocation.value;
+    return DistanceCalculator.getDistance(
+        Location(
+            myLocationData?.latitude ?? 0.0, myLocationData?.longitude ?? 0.0),
+        target);
+  }
 
   //setters for filters
   void setCountry(String? newValue) {
@@ -65,14 +85,6 @@ class HomePageController extends GetxController {
       return 'قائمة ال${getCategory()}';
     }
   }
-
-  // defineHomePageTitle(){
-  //   switch (getCategory().value) {
-  //     case "مطاعم":
-  //       return ""
-  //     default:
-  //   }
-  // }
 
   resetMode() {
     viewIndex.value = 0;
