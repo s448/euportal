@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../Core/Theme/colors.dart';
 import '../../Core/Theme/style_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -19,15 +20,9 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  int _selectedIndex = 2;
   final homeCtrl = Get.find<HomePageController>();
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
+  final PersistentTabController _controller =
+      PersistentTabController(initialIndex: 2);
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -74,83 +69,116 @@ class _NavBarState extends State<NavBar> {
         endDrawer: const Drawer(
           child: SizedBox(),
         ),
-        body: pages[_selectedIndex],
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            border: BorderDirectional(
-              top: BorderSide(color: ColorManager.greyC, width: 0.2),
-            ),
+        body: PersistentTabView(
+          context,
+          controller: _controller,
+          screens: pages,
+          items: _navBarsItems(),
+          confineInSafeArea: true,
+          backgroundColor: ColorManager.backgroundColor,
+          handleAndroidBackButtonPress: true, // Default is true.
+          resizeToAvoidBottomInset:
+              true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+          stateManagement: true, // Default is true.
+          hideNavigationBarWhenKeyboardShows:
+              true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+          decoration: NavBarDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            colorBehindNavBar: Colors.white,
           ),
-          child: BottomNavigationBar(
-            backgroundColor: ColorManager.backgroundColor,
-            selectedItemColor: ColorManager.navbarSelected,
-            unselectedItemColor: ColorManager.secondaryC,
-            type: BottomNavigationBarType.fixed,
-            selectedLabelStyle:
-                const TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
-            unselectedLabelStyle:
-                const TextStyle(fontSize: 10, fontWeight: FontWeight.w100),
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: NavBarItemIcon(
-                  imgPath: profile,
-                  color: ColorManager.secondaryC,
-                ),
-                label: 'الملف الشخصي',
-                activeIcon: NavBarItemIcon(
-                  imgPath: profile,
-                  color: ColorManager.primaryC,
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: NavBarItemIcon(
-                  imgPath: notifications,
-                  color: ColorManager.secondaryC,
-                ),
-                label: 'الإشعارات',
-                activeIcon: NavBarItemIcon(
-                  imgPath: notifications,
-                  color: ColorManager.primaryC,
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: NavBarItemIcon(
-                  imgPath: home,
-                  color: ColorManager.secondaryC,
-                ),
-                label: 'الصفحةالرئيسية',
-                activeIcon: NavBarItemIcon(
-                  imgPath: home,
-                  color: ColorManager.primaryC,
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: NavBarItemIcon(
-                  imgPath: favorites,
-                  color: ColorManager.secondaryC,
-                ),
-                label: 'المُفضّلة',
-                activeIcon: NavBarItemIcon(
-                  imgPath: favorites,
-                  color: ColorManager.primaryC,
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: NavBarItemIcon(
-                  imgPath: settings,
-                  color: ColorManager.secondaryC,
-                ),
-                label: 'الإعدادات',
-                activeIcon: NavBarItemIcon(
-                  imgPath: settings,
-                  color: ColorManager.primaryC,
-                ),
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
+          popAllScreensOnTapOfSelectedTab: true,
+          popActionScreens: PopActionScreensType.all,
+          itemAnimationProperties: const ItemAnimationProperties(
+            // Navigation Bar's items animation properties.
+            duration: Duration(milliseconds: 200),
+            curve: Curves.ease,
           ),
+          screenTransitionAnimation: const ScreenTransitionAnimation(
+            // Screen transition animation on change of selected tab.
+            animateTabTransition: true,
+            curve: Curves.ease,
+            duration: Duration(milliseconds: 200),
+          ),
+
+          navBarStyle: NavBarStyle
+              .simple, // Choose the nav bar style with this property.
         ),
+        // bottomNavigationBar: Container(
+        //   decoration: const BoxDecoration(
+        //     border: BorderDirectional(
+        //       top: BorderSide(color: ColorManager.greyC, width: 0.2),
+        //     ),
+        //   ),
+        //   child: BottomNavigationBar(
+        //     backgroundColor: ColorManager.backgroundColor,
+        //     selectedItemColor: ColorManager.navbarSelected,
+        //     unselectedItemColor: ColorManager.secondaryC,
+        //     type: BottomNavigationBarType.fixed,
+        //     selectedLabelStyle:
+        //         const TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
+        //     unselectedLabelStyle:
+        //         const TextStyle(fontSize: 10, fontWeight: FontWeight.w100),
+        //     items: const <BottomNavigationBarItem>[
+        //       BottomNavigationBarItem(
+        //         icon: NavBarItemIcon(
+        //           imgPath: profile,
+        //           color: ColorManager.secondaryC,
+        //         ),
+        //         label: 'الملف الشخصي',
+        //         activeIcon: NavBarItemIcon(
+        //           imgPath: profile,
+        //           color: ColorManager.primaryC,
+        //         ),
+        //       ),
+        //       BottomNavigationBarItem(
+        // icon: NavBarItemIcon(
+        //   imgPath: notifications,
+        //   color: ColorManager.secondaryC,
+        // ),
+        // label: 'الإشعارات',
+        // activeIcon: NavBarItemIcon(
+        //   imgPath: notifications,
+        //   color: ColorManager.primaryC,
+        // ),
+        //       ),
+        //       BottomNavigationBarItem(
+        //         icon: NavBarItemIcon(
+        //           imgPath: home,
+        //           color: ColorManager.secondaryC,
+        //         ),
+        //         label: 'الصفحةالرئيسية',
+        //         activeIcon: NavBarItemIcon(
+        //           imgPath: home,
+        //           color: ColorManager.primaryC,
+        //         ),
+        //       ),
+        //       BottomNavigationBarItem(
+        //         icon: NavBarItemIcon(
+        //           imgPath: favorites,
+        //           color: ColorManager.secondaryC,
+        //         ),
+        //         label: 'المُفضّلة',
+        //         activeIcon: NavBarItemIcon(
+        //           imgPath: favorites,
+        //           color: ColorManager.primaryC,
+        //         ),
+        //       ),
+        //       BottomNavigationBarItem(
+        //         icon: NavBarItemIcon(
+        //           imgPath: settings,
+        //           color: ColorManager.secondaryC,
+        //         ),
+        //         label: 'الإعدادات',
+        //         activeIcon: NavBarItemIcon(
+        //           imgPath: settings,
+        //           color: ColorManager.primaryC,
+        //         ),
+        //       ),
+        //     ],
+        //     currentIndex: _selectedIndex,
+        //     onTap: _onItemTapped,
+        //   ),
+        // ),
       );
     });
   }
@@ -168,8 +196,8 @@ class NavBarItemIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       imgPath,
-      width: 25,
-      height: 25,
+      width: 50,
+      height: 50,
       color: color,
     );
   }
@@ -182,3 +210,99 @@ var pages = <Widget>[
   const FavoritesPage(),
   const SettingsPage(),
 ];
+
+List<PersistentBottomNavBarItem> _navBarsItems() {
+  return [
+    PersistentBottomNavBarItem(
+      textStyle: const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w800,
+        color: ColorManager.secondaryC,
+      ),
+      activeColorSecondary: ColorManager.primaryC,
+      inactiveColorSecondary: ColorManager.secondaryC,
+      inactiveIcon: const NavBarItemIcon(
+        imgPath: profile,
+        color: ColorManager.secondaryC,
+      ),
+      title: ('الملف الشخصي'),
+      icon: const NavBarItemIcon(
+        imgPath: profile,
+        color: ColorManager.primaryC,
+      ),
+    ),
+    PersistentBottomNavBarItem(
+      textStyle: const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w800,
+        color: ColorManager.secondaryC,
+      ),
+      activeColorSecondary: ColorManager.primaryC,
+      inactiveColorSecondary: ColorManager.secondaryC,
+      icon: const NavBarItemIcon(
+        imgPath: notifications,
+        color: ColorManager.primaryC,
+      ),
+      title: 'الإشعارات',
+      inactiveIcon: const NavBarItemIcon(
+        imgPath: notifications,
+        color: ColorManager.secondaryC,
+      ),
+    ),
+    PersistentBottomNavBarItem(
+      textStyle: const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w800,
+        color: ColorManager.secondaryC,
+      ),
+      activeColorSecondary: ColorManager.primaryC,
+      inactiveColorSecondary: ColorManager.secondaryC,
+      icon: const NavBarItemIcon(
+        imgPath: home,
+        color: ColorManager.primaryC,
+      ),
+      title: 'الإشعارات',
+      inactiveIcon: const NavBarItemIcon(
+        imgPath: home,
+        color: ColorManager.secondaryC,
+      ),
+    ),
+    PersistentBottomNavBarItem(
+      textStyle: const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w800,
+        color: ColorManager.secondaryC,
+      ),
+      activeColorSecondary: ColorManager.primaryC,
+      inactiveColorSecondary: ColorManager.secondaryC,
+      icon: const NavBarItemIcon(
+        imgPath: favorites,
+        color: ColorManager.primaryC,
+      ),
+      title: 'المُفضّلة',
+      inactiveIcon: const NavBarItemIcon(
+        imgPath: favorites,
+        color: ColorManager.secondaryC,
+      ),
+    ),
+    PersistentBottomNavBarItem(
+      textStyle: const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w800,
+        color: ColorManager.secondaryC,
+      ),
+      activeColorSecondary: ColorManager.primaryC,
+      inactiveColorSecondary: ColorManager.secondaryC,
+      iconSize: 25,
+      icon: const NavBarItemIcon(
+        imgPath: settings,
+        color: ColorManager.primaryC,
+      ),
+      title: 'الإعدادات',
+      inactiveIcon: const NavBarItemIcon(
+        imgPath: settings,
+        color: ColorManager.secondaryC,
+      ),
+    ),
+  ];
+}
