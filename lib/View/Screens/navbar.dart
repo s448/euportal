@@ -8,7 +8,6 @@ import 'package:eup/View/Screens/NavbarScreens/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Core/Theme/colors.dart';
-import '../../Core/Theme/style_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -25,162 +24,171 @@ class _NavBarState extends State<NavBar> {
       PersistentTabController(initialIndex: 2);
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            homeCtrl.getAppTitle(),
-            style: StyleManager.headline,
-          ),
-          centerTitle: homeCtrl.isCenterTitle(),
-          elevation: 0.0,
-          leading: homeCtrl.viewIndex.value != 0
-              ? InkWell(
-                  onTap: () => homeCtrl.resetMode(),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 35,
-                      color: ColorManager.primaryC,
-                    ),
-                  ),
-                )
-              : Container(
-                  padding: const EdgeInsets.all(6.0),
-                  width: Get.width * 0.135,
-                  child: Image.asset(
-                    headerIc,
-                    color: ColorManager.primaryC,
-                  ),
-                ),
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                icon: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Image.asset(drawerIc),
-                ),
-                onPressed: () => Scaffold.of(context).openEndDrawer(),
-              ),
-            )
-          ],
+    // return Obx(() {
+      return PersistentTabView(
+        context,
+        controller: _controller,
+        screens: pages,
+        items: _navBarsItems(),
+        confineInSafeArea: true,
+        backgroundColor: ColorManager.backgroundColor,
+        handleAndroidBackButtonPress: true, // Default is true.
+        resizeToAvoidBottomInset:
+        true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        stateManagement: true, // Default is true.
+        hideNavigationBarWhenKeyboardShows:
+        true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          colorBehindNavBar: Colors.white,
         ),
-        endDrawer: const Drawer(
-          child: SizedBox(),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          // Navigation Bar's items animation properties.
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
         ),
-        body: PersistentTabView(
-          context,
-          controller: _controller,
-          screens: pages,
-          items: _navBarsItems(),
-          confineInSafeArea: true,
-          backgroundColor: ColorManager.backgroundColor,
-          handleAndroidBackButtonPress: true, // Default is true.
-          resizeToAvoidBottomInset:
-              true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-          stateManagement: true, // Default is true.
-          hideNavigationBarWhenKeyboardShows:
-              true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-          decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            colorBehindNavBar: Colors.white,
-          ),
-          popAllScreensOnTapOfSelectedTab: true,
-          popActionScreens: PopActionScreensType.all,
-          itemAnimationProperties: const ItemAnimationProperties(
-            // Navigation Bar's items animation properties.
-            duration: Duration(milliseconds: 200),
-            curve: Curves.ease,
-          ),
-          screenTransitionAnimation: const ScreenTransitionAnimation(
-            // Screen transition animation on change of selected tab.
-            animateTabTransition: true,
-            curve: Curves.ease,
-            duration: Duration(milliseconds: 200),
-          ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          // Screen transition animation on change of selected tab.
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
 
-          navBarStyle: NavBarStyle
-              .simple, // Choose the nav bar style with this property.
-        ),
-        // bottomNavigationBar: Container(
-        //   decoration: const BoxDecoration(
-        //     border: BorderDirectional(
-        //       top: BorderSide(color: ColorManager.greyC, width: 0.2),
-        //     ),
-        //   ),
-        //   child: BottomNavigationBar(
-        //     backgroundColor: ColorManager.backgroundColor,
-        //     selectedItemColor: ColorManager.navbarSelected,
-        //     unselectedItemColor: ColorManager.secondaryC,
-        //     type: BottomNavigationBarType.fixed,
-        //     selectedLabelStyle:
-        //         const TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
-        //     unselectedLabelStyle:
-        //         const TextStyle(fontSize: 10, fontWeight: FontWeight.w100),
-        //     items: const <BottomNavigationBarItem>[
-        //       BottomNavigationBarItem(
-        //         icon: NavBarItemIcon(
-        //           imgPath: profile,
-        //           color: ColorManager.secondaryC,
-        //         ),
-        //         label: 'الملف الشخصي',
-        //         activeIcon: NavBarItemIcon(
-        //           imgPath: profile,
-        //           color: ColorManager.primaryC,
-        //         ),
-        //       ),
-        //       BottomNavigationBarItem(
-        // icon: NavBarItemIcon(
-        //   imgPath: notifications,
-        //   color: ColorManager.secondaryC,
-        // ),
-        // label: 'الإشعارات',
-        // activeIcon: NavBarItemIcon(
-        //   imgPath: notifications,
-        //   color: ColorManager.primaryC,
-        // ),
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: NavBarItemIcon(
-        //           imgPath: home,
-        //           color: ColorManager.secondaryC,
-        //         ),
-        //         label: 'الصفحةالرئيسية',
-        //         activeIcon: NavBarItemIcon(
-        //           imgPath: home,
-        //           color: ColorManager.primaryC,
-        //         ),
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: NavBarItemIcon(
-        //           imgPath: favorites,
-        //           color: ColorManager.secondaryC,
-        //         ),
-        //         label: 'المُفضّلة',
-        //         activeIcon: NavBarItemIcon(
-        //           imgPath: favorites,
-        //           color: ColorManager.primaryC,
-        //         ),
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: NavBarItemIcon(
-        //           imgPath: settings,
-        //           color: ColorManager.secondaryC,
-        //         ),
-        //         label: 'الإعدادات',
-        //         activeIcon: NavBarItemIcon(
-        //           imgPath: settings,
-        //           color: ColorManager.primaryC,
-        //         ),
-        //       ),
-        //     ],
-        //     currentIndex: _selectedIndex,
-        //     onTap: _onItemTapped,
-        //   ),
-        // ),
+        navBarStyle: NavBarStyle
+            .simple, // Choose the nav bar style with this property.
       );
-    });
+      //   Scaffold(
+      //   appBar: AppBar(
+      //     title: Text(
+      //       homeCtrl.getAppTitle(),
+      //       style: StyleManager.headline,
+      //     ),
+      //     centerTitle: homeCtrl.isCenterTitle(),
+      //     elevation: 0.0,
+      //
+      //     ///if the view index is 0 then it's at [home page]
+      //     ///[home page] can be at 2 states : 1-with filter 2-with best of results
+      //     // leading: homeCtrl.viewIndex.value != 0
+      //     //     ? InkWell(
+      //     //   ///return back to the index 0 [home page&(state 1)]
+      //     //         onTap: () {
+      //     //           Navigator.pop(context);
+      //     //           // homeCtrl.resetMode();
+      //     //         },
+      //     //         child: const Padding(
+      //     //           padding: EdgeInsets.all(8.0),
+      //     //           child: Icon(
+      //     //             Icons.arrow_back_ios,
+      //     //             size: 35,
+      //     //             color: ColorManager.primaryC,
+      //     //           ),
+      //     //         ),
+      //     //       )
+      //     //     :
+      //     leading: Container(
+      //       padding: const EdgeInsets.all(6.0),
+      //       width: Get.width * 0.135,
+      //       child: Image.asset(
+      //         headerIc,
+      //         color: ColorManager.primaryC,
+      //       ),
+      //     ),
+      //     actions: [
+      //       Builder(
+      //         builder: (context) => IconButton(
+      //           icon: Padding(
+      //             padding: const EdgeInsets.all(8),
+      //             child: Image.asset(drawerIc),
+      //           ),
+      //           onPressed: () => Scaffold.of(context).openEndDrawer(),
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      //   endDrawer: const Drawer(
+      //     child: SizedBox(),
+      //   ),
+      //   // body: ,
+      //   // bottomNavigationBar: Container(
+      //   //   decoration: const BoxDecoration(
+      //   //     border: BorderDirectional(
+      //   //       top: BorderSide(color: ColorManager.greyC, width: 0.2),
+      //   //     ),
+      //   //   ),
+      //   //   child: BottomNavigationBar(
+      //   //     backgroundColor: ColorManager.backgroundColor,
+      //   //     selectedItemColor: ColorManager.navbarSelected,
+      //   //     unselectedItemColor: ColorManager.secondaryC,
+      //   //     type: BottomNavigationBarType.fixed,
+      //   //     selectedLabelStyle:
+      //   //         const TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
+      //   //     unselectedLabelStyle:
+      //   //         const TextStyle(fontSize: 10, fontWeight: FontWeight.w100),
+      //   //     items: const <BottomNavigationBarItem>[
+      //   //       BottomNavigationBarItem(
+      //   //         icon: NavBarItemIcon(
+      //   //           imgPath: profile,
+      //   //           color: ColorManager.secondaryC,
+      //   //         ),
+      //   //         label: 'الملف الشخصي',
+      //   //         activeIcon: NavBarItemIcon(
+      //   //           imgPath: profile,
+      //   //           color: ColorManager.primaryC,
+      //   //         ),
+      //   //       ),
+      //   //       BottomNavigationBarItem(
+      //   // icon: NavBarItemIcon(
+      //   //   imgPath: notifications,
+      //   //   color: ColorManager.secondaryC,
+      //   // ),
+      //   // label: 'الإشعارات',
+      //   // activeIcon: NavBarItemIcon(
+      //   //   imgPath: notifications,
+      //   //   color: ColorManager.primaryC,
+      //   // ),
+      //   //       ),
+      //   //       BottomNavigationBarItem(
+      //   //         icon: NavBarItemIcon(
+      //   //           imgPath: home,
+      //   //           color: ColorManager.secondaryC,
+      //   //         ),
+      //   //         label: 'الصفحةالرئيسية',
+      //   //         activeIcon: NavBarItemIcon(
+      //   //           imgPath: home,
+      //   //           color: ColorManager.primaryC,
+      //   //         ),
+      //   //       ),
+      //   //       BottomNavigationBarItem(
+      //   //         icon: NavBarItemIcon(
+      //   //           imgPath: favorites,
+      //   //           color: ColorManager.secondaryC,
+      //   //         ),
+      //   //         label: 'المُفضّلة',
+      //   //         activeIcon: NavBarItemIcon(
+      //   //           imgPath: favorites,
+      //   //           color: ColorManager.primaryC,
+      //   //         ),
+      //   //       ),
+      //   //       BottomNavigationBarItem(
+      //   //         icon: NavBarItemIcon(
+      //   //           imgPath: settings,
+      //   //           color: ColorManager.secondaryC,
+      //   //         ),
+      //   //         label: 'الإعدادات',
+      //   //         activeIcon: NavBarItemIcon(
+      //   //           imgPath: settings,
+      //   //           color: ColorManager.primaryC,
+      //   //         ),
+      //   //       ),
+      //   //     ],
+      //   //     currentIndex: _selectedIndex,
+      //   //     onTap: _onItemTapped,
+      //   //   ),
+      //   // ),
+      // );
+    // });
   }
 }
 
@@ -208,7 +216,7 @@ var pages = <Widget>[
   const NotificationsPage(),
   HomePage(),
   const FavoritesPage(),
-  const SettingsPage(),
+  SettingsPage(pp: "sss"),
 ];
 
 List<PersistentBottomNavBarItem> _navBarsItems() {

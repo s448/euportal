@@ -13,9 +13,7 @@ class ListTileItemWidget extends StatelessWidget {
   final controller = Get.find<HomePageController>();
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => controller.viewItemDetails(item),
-      child: Padding(
+    return  Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Container(
           height: Get.height * 0.29,
@@ -205,7 +203,6 @@ class ListTileItemWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),
       ),
     );
   }

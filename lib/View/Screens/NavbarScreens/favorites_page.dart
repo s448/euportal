@@ -12,7 +12,7 @@ class FavoritesPage extends StatelessWidget {
           onTap: () {
             pushNewScreen(
               context,
-              screen: SettingsPage(),
+              screen: SettingsPage(pp: "params"),
               withNavBar: true, // OPTIONAL VALUE. True by default.
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );

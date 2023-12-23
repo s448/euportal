@@ -34,6 +34,8 @@ class HomePageController extends GetxController {
 
   RxBool filterMode = false.obs;
 
+  getFilterMode() => filterMode.value;
+
   final LocationService _locationService = LocationService();
   Rx<LocationData?> currentLocation = Rx<LocationData?>(null);
 
@@ -131,9 +133,13 @@ class HomePageController extends GetxController {
       _services.filterStream(_country.value, _city.value, _category.value);
 
   RxInt viewIndex = 0.obs;
-  Item? viewedItem;
-  viewItemDetails(Item item) {
-    viewIndex.value = 1;
-    viewedItem = item;
+  // Item? viewedItem;
+  incrementViewStackIndex() {
+    //this method set the view model to details page which it's index is 1
+    viewIndex.value ++;
+  }
+
+  decrementViewIndex() {
+    viewIndex.value --;
   }
 }

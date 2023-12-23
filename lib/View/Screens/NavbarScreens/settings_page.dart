@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
-
+  SettingsPage({super.key, required this.pp});
+  final String pp;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const Center(
-        child: Text("Settings page"),
+      body: Center(
+        child: Text("Settings page   $pp"),
       ),
     );
   }

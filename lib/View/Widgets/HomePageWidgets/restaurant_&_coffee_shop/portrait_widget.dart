@@ -3,9 +3,11 @@ import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
+import 'package:eup/View/Screens/DetailsPage/portrait_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class Portrait extends StatelessWidget {
   Portrait({super.key, required this.item});
@@ -14,7 +16,17 @@ class Portrait extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => controller.viewItemDetails(item),
+      onTap: () {
+        //push the details page as a shell route
+        //shell route or child route changes the view of the body without affecting the nav bar or app bar
+        pushNewScreen(
+          context,
+          screen: DetailsPage(controller: controller,item: item),
+          withNavBar: true,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
+        controller.incrementViewStackIndex();
+      },
       child: SizedBox(
         width: Get.width * 0.3,
         height: Get.height * 0.25,

@@ -2,8 +2,10 @@ import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
+import 'package:eup/View/Screens/DetailsPage/portrait_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class LogoGridTile extends StatelessWidget {
   LogoGridTile({super.key, required this.item});
@@ -12,7 +14,18 @@ class LogoGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => controller.viewItemDetails(item),
+      onTap: (){
+        //push the details page as a shell route
+        //shell route or child route changes the view of the body without affecting the nav bar or app bar
+        pushNewScreen(
+          context,
+          screen: DetailsPage(controller: controller,item: item),
+          withNavBar: true,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(controller: controller,item: item)));
+        controller.incrementViewStackIndex();
+      },
       child: Column(
         children: [
           Expanded(
