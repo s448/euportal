@@ -25,6 +25,8 @@ dependencies:
   location: ^5.0.3
   geocoding: ^2.1.1
   persistent_bottom_nav_bar_v2: ^4.2.8
+  rate: ^0.0.2
+  google_maps_flutter: ^2.5.0
   
 
 dev_dependencies:

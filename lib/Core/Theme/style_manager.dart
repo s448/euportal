@@ -55,6 +55,11 @@ class StyleManager {
     fontFamily: font,
     fontSize: 8,
   );
+  static const TextStyle floatingButtonText = TextStyle(
+    color: Colors.white,
+    fontFamily: font,
+    fontSize: 7,
+  );
   static const TextStyle info = TextStyle(
       fontSize: 10, color: ColorManager.textC, fontWeight: FontWeight.w500);
 
@@ -67,5 +72,27 @@ class StyleManager {
   static BoxDecoration dropDownButtonDecoration = BoxDecoration(
     color: ColorManager.containerBackgroundC,
     borderRadius: BorderRadius.circular(10),
+  );
+
+  static const TextStyle infoTitle = TextStyle(
+    fontSize: infoTitleSize,
+    fontFamily: font,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+    height: 1.4,
+  );
+  static const TextStyle infoValue = TextStyle(
+    fontSize: infoValueSize,
+    fontFamily: font,
+    fontWeight: FontWeight.w200,
+    color: Colors.grey,
+    height: 1.4,
+  );
+
+  static const rateStyle = TextStyle(
+    color: Colors.yellow,
+    fontSize: rateSize,
+    fontFamily: font,
+    fontWeight: FontWeight.w100,
   );
 }

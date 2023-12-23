@@ -37,6 +37,6 @@ class LocationService {
     } catch (e) {
       log(e.toString());
     }
-    return "";
+    return "غير معروف";
   }
 }
