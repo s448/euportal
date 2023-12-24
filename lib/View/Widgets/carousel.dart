@@ -17,13 +17,13 @@ class AppCarousel extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          return const SizedBox();
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return const SizedBox();
         } else {
-          List<CarouselBanner> casousels = snapshot.data!;
+          List<CarouselBanner> carousel = snapshot.data!;
           List<Widget> banners = [];
-          for (var element in casousels) {
+          for (var element in carousel) {
             banners.add(
               //add widget
               InkWell(
@@ -31,7 +31,10 @@ class AppCarousel extends StatelessWidget {
                 child: SizedBox(
                   width: Get.width,
                   height: Get.height * 0.23,
-                  child: Image.network(element.bannerUrl ?? ""),
+                  child: Image.network(
+                    element.bannerUrl ?? "",
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             );

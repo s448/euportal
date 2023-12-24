@@ -41,6 +41,7 @@ class StyleManager {
   static const TextStyle bodyStyle = TextStyle(
     color: ColorManager.textC,
     fontFamily: font,
+    fontWeight: FontWeight.w200,
     fontSize: 14,
   );
 
@@ -94,5 +95,12 @@ class StyleManager {
     fontSize: rateSize,
     fontFamily: font,
     fontWeight: FontWeight.w100,
+  );
+
+  static const smallSizedHint = TextStyle(
+    color: ColorManager.secondaryC,
+    fontSize: smallSize,
+    fontFamily: font,
+    fontWeight: FontWeight.w200,
   );
 }

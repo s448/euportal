@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
+import 'package:eup/Core/Constant/app_name.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
@@ -30,19 +31,20 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ///appbar
               MainAppBar(),
               const SizedBox(height: 10),
-              //header
+              ///header
               const Text(
-                "أهلاً بِكَ في بوابة الإتحاد الأوروبي...",
+                "أهلاً بِكَ في $appName...",
                 style: TextStyle(
                   color: ColorManager.textC,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 6),
-              //the banner carousel
+              const SizedBox(height: 16),
+              ///the banner carousel
               SizedBox(
                 width: Get.width,
                 child: AppCarousel(
@@ -50,7 +52,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
               ///the city and country selection
               Container(
                 decoration: StyleManager.dropDownButtonDecoration,
@@ -167,7 +168,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              //drop down button of categories
+              ///drop down button of categories
               Container(
                 decoration: StyleManager.dropDownButtonDecoration,
                 child: Obx(() => DropdownButtonHideUnderline(
@@ -248,6 +249,7 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 8),
                           //best of logo
                           LogoStreamBuilder(homeCtrl: homeCtrl),
+                         const SizedBox(height: 25),
                         ],
                       );
               }),

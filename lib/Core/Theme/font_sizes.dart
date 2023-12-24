@@ -5,3 +5,4 @@ const double numiricSize = 20;
 const double infoTitleSize = 13;
 const double infoValueSize = 11;
 const double rateSize = 9;
+const double smallSize = 6;

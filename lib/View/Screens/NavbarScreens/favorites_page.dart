@@ -10,12 +10,7 @@ class FavoritesPage extends StatelessWidget {
     return Center(
       child: InkWell(
           onTap: () {
-            pushNewScreen(
-              context,
-              screen: SettingsPage(pp: "params"),
-              withNavBar: true, // OPTIONAL VALUE. True by default.
-              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            );
+
           },
           child: Text("Fav page")),
     );

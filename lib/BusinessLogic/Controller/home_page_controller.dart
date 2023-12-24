@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:eup/BusinessLogic/Services/Implementation/home_page_services.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_home_page_services.dart';
+import 'package:eup/Core/Constant/app_name.dart';
 import 'package:eup/Core/Utils/distance_calculator.dart';
 import 'package:eup/Model/carousel_banner_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
@@ -90,7 +91,7 @@ class HomePageController extends GetxController {
       viewIndex.value != 0 || getCategory().value != '' ? true : false;
   getAppTitle() {
     if (getCategory().value == '' && viewIndex.value == 0) {
-      return 'بوابة الإتحاد الأوروبي';
+      return appName;
     } else if (viewIndex.value == 1) {
       return "التفاصيل";
     } else {

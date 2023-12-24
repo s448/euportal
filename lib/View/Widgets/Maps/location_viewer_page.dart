@@ -13,31 +13,25 @@ class GoogleMapsPage extends StatefulWidget {
 
 class _GoogleMapsPageState extends State<GoogleMapsPage> {
   late GoogleMapController mapController;
+  final LatLng _kMapCenter =
+  LatLng(19.018255973653343, 72.84793849278007);
 
   @override
   Widget build(BuildContext context) {
+    final CameraPosition _kInitialPosition =
+    CameraPosition(target: _kMapCenter, zoom: 11.0, tilt: 0, bearing: 0);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Google Maps Example'),
       ),
       body: GoogleMap(
-        onMapCreated: (controller) {
-          setState(() {
-            mapController = controller;
-          });
-        },
         initialCameraPosition: CameraPosition(
-          target: LatLng(widget.latitude, widget.longitude),
-          zoom: 15.0,
+          target: LatLng(37.7749, -122.4194), // Default to San Francisco coordinates
+          zoom: 12.0,
         ),
-        markers: {
-          Marker(
-            markerId: MarkerId('locationMarker'),
-            position: LatLng(widget.latitude, widget.longitude),
-            infoWindow: InfoWindow(title: 'Location'),
-          ),
-        },
       ),
     );
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
+import 'package:eup/View/Widgets/drawer_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../Core/Constant/image_path.dart';
@@ -59,15 +60,7 @@ final homeCtrl = Get.find<HomePageController>();
                            ),
              ),
             actions: [
-              Builder(
-                builder: (context) => IconButton(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Image.asset(drawerIc),
-                  ),
-                  onPressed: () => Scaffold.of(context).openEndDrawer(),
-                ),
-              )
+             AppDrawer()
             ],);
       }
     );

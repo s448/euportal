@@ -28,7 +28,8 @@ class LogoGridTile extends StatelessWidget {
       },
       child: Column(
         children: [
-          Expanded(
+          AspectRatio(
+            aspectRatio: 1/1,
             child: SizedBox(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
@@ -39,13 +40,12 @@ class LogoGridTile extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 3),
           Text(
             item.title ?? "",
-            style: const TextStyle(
-              color: ColorManager.textC,
-              fontFamily: StyleManager.font,
-              fontSize: 10,
-            ),
+            style: StyleManager.details,
+            maxLines: 2,
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -84,7 +84,7 @@ class LogoStreamBuilder extends StatelessWidget {
                 crossAxisCount: 6,
                 crossAxisSpacing: 5.0,
                 mainAxisSpacing: 8.0,
-                childAspectRatio: 0.7,
+                childAspectRatio: 1 / 1.6,
               ),
               itemCount: items.length,
               itemBuilder: (context, index) {
