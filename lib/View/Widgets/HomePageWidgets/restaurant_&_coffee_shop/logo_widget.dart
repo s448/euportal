@@ -1,5 +1,4 @@
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
-import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
 import 'package:eup/View/Screens/DetailsPage/portrait_details_page.dart';
@@ -14,12 +13,12 @@ class LogoGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         //push the details page as a shell route
         //shell route or child route changes the view of the body without affecting the nav bar or app bar
         pushNewScreen(
           context,
-          screen: DetailsPage(controller: controller,item: item),
+          screen: DetailsPage(controller: controller, item: item),
           withNavBar: true,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );
@@ -29,7 +28,7 @@ class LogoGridTile extends StatelessWidget {
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: 1/1,
+            aspectRatio: 1 / 1,
             child: SizedBox(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),

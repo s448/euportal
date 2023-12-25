@@ -32,16 +32,16 @@ class SettingsPage extends StatelessWidget {
             const Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SharedSettingsButton(ic: Icons.person, title: "الحساب"),
+                SharedSettingsButton(ic: account, title: "الحساب"),
                 div,
-                SharedSettingsButton(ic: Icons.person, title: "سياسة الخصوصية"),
+                SharedSettingsButton(ic: privacy, title: "سياسة الخصوصية"),
                 div,
                 SharedSettingsButton(
-                    ic: Icons.person, title: "الدعم الفني والمساعدة"),
+                    ic: helpCenter, title: "الدعم الفني والمساعدة"),
                 div,
-                SharedSettingsButton(ic: Icons.person, title: "قيمنا"),
+                SharedSettingsButton(ic: rateUs, title: "قيمنا"),
                 div,
-                SharedSettingsButton(ic: Icons.person, title: "من نحن؟"),
+                SharedSettingsButton(ic: whoWeAre, title: "من نحن؟"),
               ],
             ),
             Column(
@@ -59,7 +59,7 @@ class SettingsPage extends StatelessWidget {
                   "يتم تشغيلة بواسطة فريق $appName",
                   style: StyleManager.smallSizedHint,
                 ),
-                SizedBox(height: Get.height *0.08),
+                SizedBox(height: Get.height * 0.08),
               ],
             ),
           ],

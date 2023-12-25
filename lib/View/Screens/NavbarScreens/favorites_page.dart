@@ -8,11 +8,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: InkWell(
-          onTap: () {
-
-          },
-          child: Text("Fav page")),
+      child: InkWell(onTap: () {}, child: Text("Fav page")),
     );
   }
 }

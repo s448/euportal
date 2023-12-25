@@ -54,7 +54,7 @@ class StyleManager {
   static const TextStyle details = TextStyle(
     color: ColorManager.secondaryC,
     fontFamily: font,
-    fontSize: 8,
+    fontSize: 6,
   );
   static const TextStyle floatingButtonText = TextStyle(
     color: Colors.white,

@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/product_model.dart';
 import 'package:eup/Model/search_item_model.dart';
 import 'package:eup/Service/location_service.dart';
-import 'package:eup/Service/url_launch_service.dart';
 import 'package:eup/View/Widgets/Maps/location_viewer_page.dart';
 import 'package:eup/View/Widgets/PreferredWidgets/home_app_bar.dart';
 import 'package:eup/View/Widgets/details_info_item.dart';
@@ -45,7 +43,7 @@ class DetailsPage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.network(
-                          item?.portrait ?? "",
+                          item.portrait ?? "",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -63,7 +61,7 @@ class DetailsPage extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 38.0,
                           backgroundImage: NetworkImage(
-                            item?.logo ?? "",
+                            item.logo ?? "",
                           ),
                         ),
                       ),
@@ -74,7 +72,7 @@ class DetailsPage extends StatelessWidget {
 
               ///title
               Text(
-                item?.title ?? "",
+                item.title ?? "",
                 style: StyleManager.headline,
                 textAlign: TextAlign.center,
               ),
@@ -114,7 +112,7 @@ class DetailsPage extends StatelessWidget {
                             }
                           }),
                       const VerticalDivider(),
-                      DetailsWidget(
+                      const DetailsWidget(
                         title: "تقييم المكان",
                         isRating: true,
                         value: "4.5",
@@ -127,7 +125,7 @@ class DetailsPage extends StatelessWidget {
                       const VerticalDivider(),
                       DetailsWidget(
                         title: "ساعات العمل",
-                        value: item?.workingHours ?? "",
+                        value: item.workingHours ?? "",
                       )
                     ],
                   ),
@@ -144,39 +142,52 @@ class DetailsPage extends StatelessWidget {
                   textAlign: TextAlign.right,
                 ),
               ),
+              const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GridView.builder(
+                  padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     crossAxisSpacing: 6.0,
                     mainAxisSpacing: 6.0,
-                    childAspectRatio: 1 / 1.3,
+                    childAspectRatio: 1 / 1.4,
                   ),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: item.products?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     Product? product = item.products?[index];
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              image: DecorationImage(
-                                image: NetworkImage(product?.img ??
-                                    ""), // Replace with your image URL
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                    var productImgWidget = AspectRatio(
+                      aspectRatio: 1 / 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: DecorationImage(
+                            image: NetworkImage(product?.img ?? ""),
+                            fit: BoxFit.cover,
                           ),
+                        ),
+                      ),
+                    );
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () => showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.transparent,
+                                  content: productImgWidget,
+                                );
+                              }),
+                          child: productImgWidget,
                         ),
                         const SizedBox(height: 3.0),
                         Text(
                           product?.title ?? "",
+                          style: StyleManager.info,
                           textAlign: TextAlign.center,
                         ),
                       ],

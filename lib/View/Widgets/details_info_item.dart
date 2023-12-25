@@ -29,12 +29,10 @@ class DetailsWidget extends StatelessWidget {
           isRating == true
               ? Column(
                   children: [
-                    Text(
-                      "4.5",
-                      style: StyleManager.details
-                    ),
+                    const Text("4.5",
+                        style: TextStyle(color: Colors.yellow, fontSize: 6)),
                     Rate(
-                      iconSize: 15,
+                      iconSize: 12,
                       color: Colors.yellow,
                       allowHalf: true,
                       allowClear: true,

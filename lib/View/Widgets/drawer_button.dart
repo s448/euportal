@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import '../../Core/Constant/image_path.dart';
 
 class AppDrawer extends StatelessWidget {
-   AppDrawer({Key? key}) : super(key: key);
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  const AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(ctx) {
-    return  Builder(
+    return Builder(
       builder: (context) => IconButton(
         icon: Padding(
           padding: const EdgeInsets.all(8),

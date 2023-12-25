@@ -45,6 +45,7 @@ flutter:
     - assets/navbar/active/
     - assets/navbar/unactive/
     - assets/svg/
+    - assets/icons/settings/
 
   fonts:
     - family: font

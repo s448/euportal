@@ -16,23 +16,6 @@ const callIc = "assets/icons/call.svg";
 const fbIc = "assets/icons/facebook.svg";
 const instaIc = "assets/icons/instagram.svg";
 
-// const notificationIc = "assets/home/notifications_icon.png";
-// const appLogo = "assets/rafeeqi_logo.png";
-
-//sections
-// const testIllustration = "assets/home/test.png";
-
-// const illustration1 = "assets/home/illustrations/section1.png";
-// const illustration2 = "assets/home/illustrations/section2.png";
-// const illustration3 = "assets/home/illustrations/section3.png";
-// const illustration4 = "assets/home/illustrations/section4.png";
-// const illustration5 = "assets/home/illustrations/section5.png";
-// const illustration6 = "assets/home/illustrations/section6.png";
-// const illustration7 = "assets/home/illustrations/section7.png";
-// const illustration8 = "assets/home/illustrations/section8.png";
-// const illustration9 = "assets/home/illustrations/section9.png";
-// const illustration10 = "assets/home/illustrations/section10.png";
-
 //nav bar unactive
 const notificationUnactive =
     "assets/navbar/unactive/notifications_nav_unactive.png";
@@ -54,3 +37,10 @@ const profile = "assets/navbar/active/profile-selected.svg";
 const home = "assets/navbar/active/home-selected.svg";
 const favorites = "assets/navbar/active/fav-selected.svg";
 const settings = "assets/navbar/active/settings_selected.svg";
+
+//settings page
+const account = "assets/icons/settings/account.svg";
+const privacy = "assets/icons/settings/privacy_policy.svg";
+const helpCenter = "assets/icons/settings/help_center.svg";
+const rateUs = "assets/icons/settings/rate_us.svg";
+const whoWeAre = "assets/icons/settings/who_we_are.svg";
