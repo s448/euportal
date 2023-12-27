@@ -12,7 +12,12 @@
           "package_name": "eu.portal.ar"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "548288157184-4p72pojer8kp4j6p8hdro24gfbirr6ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAQAR3yTQXsUOcKAPZuykbluDc3bHDmp-E"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548288157184-4p72pojer8kp4j6p8hdro24gfbirr6ja.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548288157184-5jqj45fidsfckid01su40fdmvt4sssv1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eup.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

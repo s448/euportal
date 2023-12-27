@@ -1,6 +1,7 @@
 //home page components
 
 const headerIc = "assets/images/app-header.png";
+const headerSvg = "assets/images/app-header.svg";
 const scope = "assets/icons/scope.svg";
 const filter = "assets/icons/filter.svg";
 const testBanner = "assets/images/test_banner.png";

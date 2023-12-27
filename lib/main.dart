@@ -22,7 +22,7 @@ class EupApp extends StatelessWidget {
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
       theme: StyleManager.themeManager,
-      initialRoute: Routes.navbar,
+      initialRoute: Routes.signup,
       getPages: getPages,
     );
   }
