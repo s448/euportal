@@ -65,4 +65,6 @@ class AuthController extends GetxController {
     textObsecured.value = !textObsecured.value;
     update();
   }
+
+  flipRememberMe(val) => rememberMe.value = val;
 }

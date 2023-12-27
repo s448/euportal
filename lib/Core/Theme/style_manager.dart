@@ -103,4 +103,12 @@ class StyleManager {
     fontFamily: font,
     fontWeight: FontWeight.w200,
   );
+
+  static const TextStyle greenNormalSize = TextStyle(
+    fontSize: medtaDataSize,
+    fontFamily: font,
+    fontWeight: FontWeight.bold,
+    color: ColorManager.primaryC,
+    height: 1.4,
+  );
 }

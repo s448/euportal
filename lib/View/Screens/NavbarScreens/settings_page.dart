@@ -4,7 +4,6 @@ import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/View/Widgets/drawer_button.dart';
 import 'package:eup/View/Widgets/settings_shared_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../Core/Constant/image_path.dart';
@@ -49,11 +48,10 @@ class SettingsPage extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(6.0),
-                  child: SvgPicture.asset(
-                    headerSvg,
+                  child: Image.asset(
+                    headerIc,
                     width: 55,
                     height: 55,
-                    color: ColorManager.primaryC,
                   ),
                 ),
                 const Text(

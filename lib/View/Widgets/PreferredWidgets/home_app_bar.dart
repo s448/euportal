@@ -1,7 +1,6 @@
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/View/Widgets/drawer_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../Core/Constant/image_path.dart';
 import '../../../Core/Theme/colors.dart';
@@ -54,15 +53,13 @@ class MainAppBar extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(6.0),
                   width: Get.width * 0.135,
-                  child: SvgPicture.asset(
-                    headerSvg,
-                    width: 55,
-                    height: 55,
+                  child: Image.asset(
+                    headerIc,
                     color: ColorManager.primaryC,
                   ),
                 ),
               ),
-        actions: [AppDrawer()],
+        actions: const [AppDrawer()],
       );
     });
   }

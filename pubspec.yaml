@@ -29,6 +29,7 @@ dependencies:
   google_maps_flutter: ^2.5.0
   firebase_auth: ^4.15.3
   uuid: ^4.2.2
+  auth_buttons: ^3.0.2
   
 
 dev_dependencies:

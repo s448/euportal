@@ -15,6 +15,6 @@ final getPages = [
   ),
   GetPage(
     name: Routes.signup,
-    page: () => const SignUpPage(),
+    page: () => SignUpPage(),
   ),
 ];
