@@ -88,15 +88,16 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
     try {
       final twitterLogin = TwitterLogin(
         // Consumer API keys
-        apiKey: 'FIKTvrMlQnSgOINECLqBQnxya',
+        apiKey: 'JCFetzF0eQcziWxGcfiZ0lkao',
         // Consumer API Secret keys
-        apiSecretKey: 'ijpP87C36NGTlOv3Sgfe5Lw61fPr28g1HCQ8YqLZNlXpJE5Jwi',
+        apiSecretKey: 'InlARLu46pkWg1rgwC02vrPruVg3WATcfyBRoxyPby0RYK2ip3',
         // Registered Callback URLs in TwitterApp
         // Android is a deeplink
         // iOS is a URLScheme
         redirectURI: 'https://euportal-bb198.firebaseapp.com/__/auth/handler',
       );
-      final AuthResult authResult = await twitterLogin.login(forceLogin: true);
+      final AuthResult authResult =
+          await twitterLogin.loginV2(forceLogin: true);
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
           // success
