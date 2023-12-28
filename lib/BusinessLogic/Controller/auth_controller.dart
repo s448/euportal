@@ -104,6 +104,8 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<bool> signInUsingTwitter() => _authService.signInUsingTwitter();
+
   Future<bool> signOut() => _authService.signOut();
   Future<bool> sendResetPasswordLink() =>
       _authService.sendResetPasswordLink(getEmail);
@@ -116,7 +118,7 @@ class AuthController extends GetxController {
   RxBool isXLoading = false.obs;
 
   ///the UI is triggered between Sign up or Login according to this flag
-  RxBool isLogin = false.obs;
+  RxBool isLogin = true.obs;
 
   changeObscureTextStatus() {
     textObsecured.value = !textObsecured.value;

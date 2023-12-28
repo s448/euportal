@@ -111,4 +111,12 @@ class StyleManager {
     color: ColorManager.primaryC,
     height: 1.4,
   );
+
+  static const TextStyle authButtonTextStyle = TextStyle(
+    fontSize: bodySize,
+    fontFamily: font,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    height: 1.4,
+  );
 }

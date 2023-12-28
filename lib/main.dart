@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:eup/BusinessLogic/Controller/user_controller.dart';
 import 'package:eup/Core/Constant/app_name.dart';
 import 'package:eup/Service/local_storage_service.dart';
-import 'package:eup/View/Screens/Authentication/sign_up_page.dart';
+import 'package:eup/View/Screens/Authentication/auth_page.dart';
 import 'package:eup/View/Screens/navbar.dart';
 import 'package:eup/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

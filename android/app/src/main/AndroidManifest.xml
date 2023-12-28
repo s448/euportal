@@ -34,6 +34,12 @@
                 <data android:scheme="tel" />
                 <data android:scheme="https" />
             </intent-filter>
+            <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https://euportal-bb198.firebaseapp.com/__/auth/handler"/>
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
@@ -42,5 +48,8 @@
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD5lVph6oxgfNAel4axaf_4vbWiz_-BYu0"/>
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
     </application>
 </manifest>

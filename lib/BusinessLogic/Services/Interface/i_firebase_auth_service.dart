@@ -15,4 +15,6 @@ abstract class IFirebaseAuthService {
   Future<bool> signOut();
 
   Future<bool> sendResetPasswordLink(String email);
+
+  Future<bool> signInUsingTwitter();
 }

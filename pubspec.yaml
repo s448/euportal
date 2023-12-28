@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^4.15.3
   uuid: ^4.2.2
   shared_preferences: ^2.2.2
+  twitter_login: ^4.4.2
   
 
 dev_dependencies:

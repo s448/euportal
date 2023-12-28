@@ -193,7 +193,6 @@ class SignUpPage extends StatelessWidget {
         ],
       ),
     );
-
     var _loginForm = Form(
       key: controller.loginFormKey,
       child: Column(
@@ -209,7 +208,9 @@ class SignUpPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.12),
+              SizedBox(height: Get.height * 0.08),
+
+              ///header ==> app icon
               Center(
                 child: Image.asset(
                   headerIc,
@@ -219,6 +220,8 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
+
+              ///page title
               Obx(() {
                 return Text(
                   controller.isLogin.value ? "تسجيل الدخول" : "التسجيل",
@@ -230,6 +233,8 @@ class SignUpPage extends StatelessWidget {
                 );
               }),
               const SizedBox(height: 12),
+
+              ///page description
               Obx(() {
                 return Text(
                   controller.isLogin.value
@@ -239,19 +244,23 @@ class SignUpPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 );
               }),
-              const SizedBox(height: 25),
+              const SizedBox(height: 15),
 
               ///registration form
               Obx(() {
                 return controller.isLogin.value ? _loginForm : _signupForm;
               }),
               const SizedBox(height: 2),
+
+              ///remember me
               Obx(() {
                 return Row(
                   children: [
                     Checkbox(
                       value: controller.rememberMe.value,
                       onChanged: (v) => controller.flipRememberMe(v),
+                      checkColor: Colors.white,
+                      activeColor: ColorManager.primaryC,
                     ),
                     const Text(
                       "تذكرني",
@@ -261,27 +270,35 @@ class SignUpPage extends StatelessWidget {
                 );
               }),
               const SizedBox(height: 4),
+
+              ///auth action button
               Obx(() {
                 return InkWell(
                   onTap: () => controller.isLogin.value
                       ? controller.signInWithEmailAndPassword()
                       : controller.createUserWithEmailAndPassword(),
                   child: Container(
-                    padding: const EdgeInsets.all(4),
+                    width: Get.width,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      border: Border.all(color: ColorManager.primaryC),
+                      color: ColorManager.primaryC,
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: controller.signInBtnLoading.value == true
                         ? const CircularProgressIndicator()
-                        : const Text(
-                            "تسجيل",
-                            style: StyleManager.greenNormalSize,
+                        : Text(
+                            controller.isLogin.value
+                                ? "تسجيل الدخول"
+                                : "تسجيل الآن",
+                            style: StyleManager.authButtonTextStyle,
                           ),
                   ),
                 );
               }),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
+
+              ///social auth identifier
               Obx(() {
                 return Center(
                   child: Text(
@@ -302,7 +319,7 @@ class SignUpPage extends StatelessWidget {
                     onTap: () {},
                     child: Image.asset(
                       authFb,
-                      width: Get.width * 0.12,
+                      width: Get.width * 0.08,
                       height: Get.height * 0.06,
                     ),
                   ),
@@ -311,22 +328,22 @@ class SignUpPage extends StatelessWidget {
                     onTap: () {},
                     child: Image.asset(
                       authGoogle,
-                      width: Get.width * 0.12,
+                      width: Get.width * 0.08,
                       height: Get.height * 0.06,
                     ),
                   ),
                   const SizedBox(width: 7),
                   InkWell(
-                    onTap: () {},
+                    onTap: () => controller.signInUsingTwitter(),
                     child: Image.asset(
                       authX,
-                      width: Get.width * 0.12,
+                      width: Get.width * 0.08,
                       height: Get.height * 0.06,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 6),
 
               ///join as a guest
               InkWell(
@@ -343,7 +360,38 @@ class SignUpPage extends StatelessWidget {
                     style: StyleManager.greenNormalSize,
                   ),
                 ),
-              )
+              ),
+              const SizedBox(height: 8),
+
+              ///switch between login and sign up ==> identifier
+              Obx(
+                () => Text(
+                  controller.isLogin.value ? "ليس لديك حساب؟" : "هل لديك حساب؟",
+                  style: StyleManager.greenNormalSize,
+                ),
+              ),
+
+              ///switch between login and sign up modes
+              Obx(() {
+                return InkWell(
+                  onTap: () =>
+                      controller.isLogin.value = !controller.isLogin.value,
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: ColorManager.primaryC,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      controller.isLogin.value
+                          ? "إفتح حساب الآن"
+                          : "سجل الدخول الآن",
+                      style: StyleManager.authButtonTextStyle,
+                    ),
+                  ),
+                );
+              }),
+              const SizedBox(height: 35)
             ],
           ),
         ),

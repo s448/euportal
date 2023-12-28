@@ -1,4 +1,4 @@
-import 'package:eup/View/Screens/Authentication/sign_up_page.dart';
+import 'package:eup/View/Screens/Authentication/auth_page.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'View/Screens/navbar.dart';
 

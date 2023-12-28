@@ -2,9 +2,12 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_firebase_auth_service.dart';
+import 'package:eup/Core/Utils/ExceptionHandling/firebase_auth_error_handler.dart';
 import 'package:eup/Model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:twitter_login/entity/auth_result.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -24,7 +27,8 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       return true;
     } on FirebaseAuthException catch (e) {
       log(e.toString());
-      String errorMessage = _mapFirebaseAuthExceptionToMessage(e);
+      String errorMessage =
+          FirebaseAuthErrorHandler.mapFirebaseAuthExceptionToMessage(e);
       Get.snackbar('خطأ', errorMessage, snackPosition: SnackPosition.BOTTOM);
       return false;
     } catch (e) {
@@ -47,7 +51,8 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       return true;
     } on FirebaseAuthException catch (e) {
       log(e.toString());
-      String errorMessage = _mapFirebaseAuthExceptionToMessage(e);
+      String errorMessage =
+          FirebaseAuthErrorHandler.mapFirebaseAuthExceptionToMessage(e);
       Get.snackbar('خطأ', errorMessage, snackPosition: SnackPosition.BOTTOM);
       return false;
     } catch (e) {
@@ -79,23 +84,37 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
     }
   }
 
-  // Map FirebaseAuthException codes to user-friendly error messages
-  String _mapFirebaseAuthExceptionToMessage(FirebaseAuthException exception) {
-    switch (exception.code) {
-      case 'email-already-in-use':
-        return 'عنوان البريد الإلكتروني قيد الاستخدام بالفعل من قبل حساب آخر.';
-      case 'invalid-email':
-        return 'عنوان البريد الإلكتروني غير صالح.';
-      case 'weak-password':
-        return 'كلمة المرور ضعيفة جداً.';
-      case 'user-not-found':
-        return 'لا يوجد مستخدم لهذا البريد الإلكتروني.';
-      case 'wrong-password':
-        return 'كلمة المرور غير صحيحة لهذا المستخدم.';
-      case 'invalid-credential':
-        return 'الاعتمادات غير صحيحة. يرجى التحقق من صحة البريد الإلكتروني وكلمة المرور.';
-      default:
-        return 'فشلت عملية المصادقة. يرجى المحاولة مرة أخرى.';
+  Future<bool> signInUsingTwitter() async {
+    try {
+      final twitterLogin = TwitterLogin(
+        // Consumer API keys
+        apiKey: 'FIKTvrMlQnSgOINECLqBQnxya',
+        // Consumer API Secret keys
+        apiSecretKey: 'ijpP87C36NGTlOv3Sgfe5Lw61fPr28g1HCQ8YqLZNlXpJE5Jwi',
+        // Registered Callback URLs in TwitterApp
+        // Android is a deeplink
+        // iOS is a URLScheme
+        redirectURI: 'https://euportal-bb198.firebaseapp.com/__/auth/handler',
+      );
+      final AuthResult authResult = await twitterLogin.login(forceLogin: true);
+      switch (authResult.status) {
+        case TwitterLoginStatus.loggedIn:
+          // success
+          return true;
+        case TwitterLoginStatus.cancelledByUser:
+          // cancel
+          log("message => ${authResult.errorMessage}");
+          return false;
+        case TwitterLoginStatus.error:
+          // error
+          log("message => ${authResult.errorMessage}");
+          return false;
+        case null:
+          return false;
+      }
+    } catch (e) {
+      log(e.toString());
+      return false;
     }
   }
 }

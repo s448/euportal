@@ -336,6 +336,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.15.4"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: d4872660c46d929f6b8a9ef4e7a7eff7e49bbf0c4ec3f385ee32df5119175139
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.2"
   http_parser:
     dependency: transitive
     description:
@@ -677,6 +685,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.1"
+  twitter_login:
+    dependency: "direct main"
+    description:
+      name: twitter_login
+      sha256: "31ff9db2e37eda878b876a4ce6d1525f51d34b6cd9de9aa185b07027a23ab95b"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.4.2"
   typed_data:
     dependency: transitive
     description:
