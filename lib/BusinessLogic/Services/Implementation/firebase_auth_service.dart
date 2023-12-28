@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_firebase_auth_service.dart';
 import 'package:eup/Model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  @override
   User? get currentUser => _auth.currentUser;
 
   @override
@@ -20,8 +22,14 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       log(e.toString());
+      String errorMessage = _mapFirebaseAuthExceptionToMessage(e);
+      Get.snackbar('خطأ', errorMessage, snackPosition: SnackPosition.BOTTOM);
+      return false;
+    } catch (e) {
+      Get.snackbar('خطأ', 'حدث خطأ غير متوقع',
+          snackPosition: SnackPosition.BOTTOM);
       return false;
     }
   }
@@ -37,8 +45,14 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       ///save user info to the firestore with
       await _firestore.collection('users').doc(user.id).set(user.toJson());
       return true;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       log(e.toString());
+      String errorMessage = _mapFirebaseAuthExceptionToMessage(e);
+      Get.snackbar('خطأ', errorMessage, snackPosition: SnackPosition.BOTTOM);
+      return false;
+    } catch (e) {
+      Get.snackbar('خطأ', 'حدث خطأ غير متوقع',
+          snackPosition: SnackPosition.BOTTOM);
       return false;
     }
   }
@@ -62,6 +76,26 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
     } catch (e) {
       log(e.toString());
       return false;
+    }
+  }
+
+  // Map FirebaseAuthException codes to user-friendly error messages
+  String _mapFirebaseAuthExceptionToMessage(FirebaseAuthException exception) {
+    switch (exception.code) {
+      case 'email-already-in-use':
+        return 'عنوان البريد الإلكتروني قيد الاستخدام بالفعل من قبل حساب آخر.';
+      case 'invalid-email':
+        return 'عنوان البريد الإلكتروني غير صالح.';
+      case 'weak-password':
+        return 'كلمة المرور ضعيفة جداً.';
+      case 'user-not-found':
+        return 'لا يوجد مستخدم لهذا البريد الإلكتروني.';
+      case 'wrong-password':
+        return 'كلمة المرور غير صحيحة لهذا المستخدم.';
+      case 'invalid-credential':
+        return 'الاعتمادات غير صحيحة. يرجى التحقق من صحة البريد الإلكتروني وكلمة المرور.';
+      default:
+        return 'فشلت عملية المصادقة. يرجى المحاولة مرة أخرى.';
     }
   }
 }

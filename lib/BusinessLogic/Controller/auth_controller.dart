@@ -51,11 +51,27 @@ class AuthController extends GetxController {
 
   Stream<User?> get authStateChanges => _authService.authStateChanges;
 
-  Future<bool> signInWithEmailAndPassword() => _authService
-      .signInWithEmailAndPassword(email: getEmail, password: getPassword);
+  Future<bool> signInWithEmailAndPassword() async {
+    signInBtnLoading.value = true;
+    if (loginFormKey.currentState!.validate()) {
+      var result = await _authService.signInWithEmailAndPassword(
+          email: getEmail, password: getPassword);
+      if (rememberMe.value) {
+        await saveUserAuthState(result);
+      }
+      if (result) {
+        Get.offAllNamed(Routes.navbar);
+      }
+      signInBtnLoading.value = false;
+      return result;
+    } else {
+      signInBtnLoading.value = false;
+      return false;
+    }
+  }
 
   Future<bool> createUserWithEmailAndPassword() async {
-    isSignUpBtnLoading.value = true;
+    signInBtnLoading.value = true;
     if (registerFormKey.currentState!.validate()) {
       log(getFirstName);
       log(getLastName);
@@ -77,11 +93,13 @@ class AuthController extends GetxController {
       if (rememberMe.value) {
         await saveUserAuthState(result);
       }
-      Get.offAllNamed(Routes.navbar);
-      isSignUpBtnLoading.value = false;
+      if (result) {
+        Get.offAllNamed(Routes.navbar);
+      }
+      signInBtnLoading.value = false;
       return result;
     } else {
-      isSignUpBtnLoading.value = false;
+      signInBtnLoading.value = false;
       return false;
     }
   }
@@ -91,12 +109,14 @@ class AuthController extends GetxController {
       _authService.sendResetPasswordLink(getEmail);
 
   ///buttons state identifiers
-  RxBool isloginBtnLoading = false.obs;
-  RxBool isSignUpBtnLoading = false.obs;
+  RxBool signInBtnLoading = false.obs;
   RxBool isSignOutBtnLoading = false.obs;
   RxBool isGoogleLoading = false.obs;
   RxBool isFacebookLoading = false.obs;
   RxBool isXLoading = false.obs;
+
+  ///the UI is triggered between Sign up or Login according to this flag
+  RxBool isLogin = false.obs;
 
   changeObscureTextStatus() {
     textObsecured.value = !textObsecured.value;

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
+import 'package:eup/BusinessLogic/Controller/user_controller.dart';
 import 'package:eup/Core/Constant/app_name.dart';
 import 'package:eup/Service/local_storage_service.dart';
 import 'package:eup/View/Screens/Authentication/sign_up_page.dart';
@@ -15,25 +15,24 @@ import 'Core/Theme/style_manager.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  Get.put(HomePageController(), permanent: true);
   await SharedPreferencesService().init();
+  Get.put(UserController(), permanent: true);
 
   return runApp(EupApp());
 }
 
 class EupApp extends StatelessWidget {
   EupApp({super.key});
-  final _sharedPrefs = SharedPreferencesService();
-
+  final userCintroller = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
-    log(_sharedPrefs.isUserLoggedInAndRemembered().toString());
+    log(userCintroller.isUserAuthenticated().toString());
     return GetMaterialApp(
       title: appName,
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
       theme: StyleManager.themeManager,
-      home: _sharedPrefs.isUserLoggedInAndRemembered() == true
+      home: userCintroller.isUserAuthenticated() == false
           ? const NavBar()
           : SignUpPage(),
       getPages: getPages,

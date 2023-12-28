@@ -2,6 +2,8 @@ import 'package:eup/Model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IFirebaseAuthService {
+  User? get currentUser;
+
   Stream<User?> get authStateChanges;
 
   Future<bool> signInWithEmailAndPassword(
