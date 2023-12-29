@@ -32,6 +32,7 @@ dependencies:
   shared_preferences: ^2.2.2
   twitter_login: ^4.4.2
   flutter_facebook_auth: ^6.0.3
+  google_sign_in: ^6.2.1
   
 
 dev_dependencies:

@@ -1,19 +1,20 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eup/BusinessLogic/Services/Implementation/firestore_services.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_firebase_auth_service.dart';
+import 'package:eup/BusinessLogic/Services/Interface/i_firestore_services.dart';
 import 'package:eup/Core/Utils/ExceptionHandling/firebase_auth_error_handler.dart';
 import 'package:eup/Model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/entity/auth_result.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  final IFirestoreService _firestore = FirestoreServices();
   @override
   User? get currentUser => _auth.currentUser;
 
@@ -48,8 +49,11 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
           email: user.email ?? "", password: password);
 
       ///save user info to the firestore with
-      await _firestore.collection('users').doc(user.id).set(user.toJson());
-      return true;
+      if (await _firestore.saveUserData(user)) {
+        return true;
+      } else {
+        return false;
+      }
     } on FirebaseAuthException catch (e) {
       log(e.toString());
       String errorMessage =
@@ -103,7 +107,19 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
           // success
-          return true;
+          ///save user data to firestore
+          var usr = authResult.user;
+          if (await _firestore.saveUserData(UserModel(
+            email: usr?.email,
+            firstName: usr?.name,
+            id: usr!.id.toString(),
+            profile: usr.thumbnailImage,
+            token: "",
+          ))) {
+            return true;
+          } else {
+            return false;
+          }
         case TwitterLoginStatus.cancelledByUser:
           // cancel
           log("message => ${authResult.errorMessage}");
@@ -132,8 +148,7 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
       // Once signed in, return the UserCredential
-      final UserCredential userCredential =
-          await _auth.signInWithCredential(facebookAuthCredential);
+      var userCredential = await signInUsingCredentials(facebookAuthCredential);
       final User user = userCredential.user!;
 
       if (facebookAuthCredential.accessToken == null) {
@@ -141,25 +156,65 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       } else {
         ///if new user save it's info in firestore
         if (userCredential.additionalUserInfo!.isNewUser) {
-          var userData = UserModel(
-            email: user.email,
-            id: user.uid,
-            firstName: user.displayName,
-            profile: user.photoURL,
-            token: "",
-          );
-          await _firestore
-              .collection("users")
-              .doc(user.uid)
-              .set(userData.toJson());
+          if (await _firestore.registerUser(user)) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return true;
         }
       }
-      return true;
     } catch (e) {
       log(e.toString());
       Get.snackbar('خطأ', 'حدث خطأ غير متوقع',
           snackPosition: SnackPosition.BOTTOM);
       return false;
     }
+  }
+
+  @override
+  Future<bool> signInUsingGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+
+      final GoogleSignInAuthentication? googleSignInAuth =
+          await googleSignInAccount?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuth?.accessToken,
+        idToken: googleSignInAuth?.idToken,
+      );
+
+      var userCredential = await signInUsingCredentials(credential);
+      User? user = userCredential.user;
+
+      if (user != null) {
+        if (userCredential.additionalUserInfo!.isNewUser) {
+          if (await _firestore.registerUser(user)) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      log(e.toString());
+      Get.snackbar('خطأ', 'حدث خطأ غير متوقع',
+          snackPosition: SnackPosition.BOTTOM);
+      return false;
+    }
+  }
+
+  signInUsingCredentials(AuthCredential credential) async {
+    final UserCredential userCredential =
+        await _auth.signInWithCredential(credential);
+    return userCredential;
   }
 }

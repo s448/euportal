@@ -104,7 +104,14 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> signInUsingTwitter() => _authService.signInUsingTwitter();
+  signInUsingTwitter() async {
+    var result = await _authService.signInUsingTwitter();
+    if (result) {
+      await saveUserAuthState(true);
+      Get.offAllNamed(Routes.navbar);
+    }
+  }
+
   signInUsingFacebook() async {
     var result = await _authService.signInUsingFacebook();
     if (result) {
@@ -113,19 +120,46 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> signOut() => _authService.signOut();
+  signInUsingGoogle() async {
+    var result = await _authService.signInUsingGoogle();
+    if (result) {
+      await saveUserAuthState(true);
+      Get.offAllNamed(Routes.navbar);
+    }
+  }
+
+  signOut() async {
+    try {
+      if (await _authService.signOut()) {
+        saveUserAuthState(false);
+        Get.snackbar(
+          "تم تسجيل الخروج بنجاح",
+          "",
+        );
+      } else {
+        Get.snackbar(
+          "خطأ",
+          "لم يتم إكمال العملية",
+        );
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   Future<bool> sendResetPasswordLink() =>
       _authService.sendResetPasswordLink(getEmail);
 
   ///buttons state identifiers
   RxBool signInBtnLoading = false.obs;
-  RxBool isSignOutBtnLoading = false.obs;
+  RxBool resetPasswordBtnLoading = false.obs;
   RxBool isGoogleLoading = false.obs;
   RxBool isFacebookLoading = false.obs;
   RxBool isXLoading = false.obs;
 
   ///the UI is triggered between Sign up or Login according to this flag
   RxBool isLogin = true.obs;
+  RxBool isResetPassword = false.obs;
 
   changeObscureTextStatus() {
     textObsecured.value = !textObsecured.value;

@@ -19,4 +19,6 @@ abstract class IFirebaseAuthService {
   Future<bool> signInUsingTwitter();
 
   Future<bool> signInUsingFacebook();
+
+  Future<bool> signInUsingGoogle();
 }
