@@ -298,23 +298,28 @@ class SignUpPage extends StatelessWidget {
                         controller.isLogin.value ? _loginForm : _signupForm,
 
                         const SizedBox(height: 2),
-                        InkWell(
-                          onTap: () => controller.isResetPassword.value = true,
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                "هل نسيت كلمة المرور؟",
-                                style: StyleManager.info,
-                              ),
-                              SizedBox(width: 3),
-                              Text(
-                                "إعادة تعيين",
-                                style: StyleManager.greenNormalSize,
+
+                        ///forgot password
+                        controller.isLogin.value
+                            ? InkWell(
+                                onTap: () =>
+                                    controller.isResetPassword.value = true,
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      "هل نسيت كلمة المرور؟",
+                                      style: StyleManager.info,
+                                    ),
+                                    SizedBox(width: 3),
+                                    Text(
+                                      "إعادة تعيين",
+                                      style: StyleManager.greenNormalSize,
+                                    )
+                                  ],
+                                ),
                               )
-                            ],
-                          ),
-                        ),
+                            : const SizedBox(),
                         const SizedBox(height: 2),
 
                         ///remember me

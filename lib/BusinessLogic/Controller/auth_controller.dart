@@ -147,8 +147,25 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> sendResetPasswordLink() =>
-      _authService.sendResetPasswordLink(getEmail);
+  sendResetPasswordLink() async {
+    if (resetPasswordFormKey.currentState!.validate()) {
+      resetPasswordBtnLoading.value = true;
+      if (await _authService.sendResetPasswordLink(getEmail)) {
+        Get.snackbar("تم ارسال الرابط", "تحقق من بريدك الالكتروني");
+      } else {
+        Get.snackbar(
+          "خطأ",
+          "لم يتم إكمال العملية",
+        );
+      }
+
+      ///stop the circular indicator
+      resetPasswordBtnLoading.value = false;
+
+      ///go back to login view
+      isResetPassword.value = false;
+    }
+  }
 
   ///buttons state identifiers
   RxBool signInBtnLoading = false.obs;
