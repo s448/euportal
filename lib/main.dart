@@ -23,16 +23,16 @@ void main(List<String> args) async {
 
 class EupApp extends StatelessWidget {
   EupApp({super.key});
-  final userCintroller = Get.find<UserController>();
+  final userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
-    log(userCintroller.isUserAuthenticated().toString());
+    log(userController.isUserAuthenticated().toString());
     return GetMaterialApp(
       title: appName,
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
       theme: StyleManager.themeManager,
-      home: userCintroller.isUserAuthenticated() == false
+      home: userController.isUserAuthenticated() == true
           ? const NavBar()
           : SignUpPage(),
       getPages: getPages,

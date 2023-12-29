@@ -316,7 +316,7 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () => controller.signInUsingFacebook(),
                     child: Image.asset(
                       authFb,
                       width: Get.width * 0.08,

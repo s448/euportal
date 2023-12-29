@@ -5,6 +5,7 @@ import 'package:eup/BusinessLogic/Services/Interface/i_firebase_auth_service.dar
 import 'package:eup/Core/Utils/ExceptionHandling/firebase_auth_error_handler.dart';
 import 'package:eup/Model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:twitter_login/entity/auth_result.dart';
 import 'package:twitter_login/twitter_login.dart';
@@ -84,6 +85,7 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
     }
   }
 
+  @override
   Future<bool> signInUsingTwitter() async {
     try {
       final twitterLogin = TwitterLogin(
@@ -115,6 +117,48 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       }
     } catch (e) {
       log(e.toString());
+      return false;
+    }
+  }
+
+  @override
+  signInUsingFacebook() async {
+    try {
+      // Trigger the sign-in flow
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      // Create a credential from the access token
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+      // Once signed in, return the UserCredential
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(facebookAuthCredential);
+      final User user = userCredential.user!;
+
+      if (facebookAuthCredential.accessToken == null) {
+        return false;
+      } else {
+        ///if new user save it's info in firestore
+        if (userCredential.additionalUserInfo!.isNewUser) {
+          var userData = UserModel(
+            email: user.email,
+            id: user.uid,
+            firstName: user.displayName,
+            profile: user.photoURL,
+            token: "",
+          );
+          await _firestore
+              .collection("users")
+              .doc(user.uid)
+              .set(userData.toJson());
+        }
+      }
+      return true;
+    } catch (e) {
+      log(e.toString());
+      Get.snackbar('خطأ', 'حدث خطأ غير متوقع',
+          snackPosition: SnackPosition.BOTTOM);
       return false;
     }
   }

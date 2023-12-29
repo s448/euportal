@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EU Portal</string>
+    <string name="facebook_app_id">2460795357454853</string>
+    <string name="fb_login_protocol_scheme">fb035de37ea39d2c7e8ae92c429e988b35</string>
+    <string name="facebook_client_token">5ec9e29c17d2eaf85d1c97340532e3ee</string>
+</resources>

@@ -105,6 +105,13 @@ class AuthController extends GetxController {
   }
 
   Future<bool> signInUsingTwitter() => _authService.signInUsingTwitter();
+  signInUsingFacebook() async {
+    var result = await _authService.signInUsingFacebook();
+    if (result) {
+      await saveUserAuthState(true);
+      Get.offAllNamed(Routes.navbar);
+    }
+  }
 
   Future<bool> signOut() => _authService.signOut();
   Future<bool> sendResetPasswordLink() =>
