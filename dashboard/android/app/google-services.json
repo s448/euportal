@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "548288157184",
+    "project_id": "euportal-bb198",
+    "storage_bucket": "euportal-bb198.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548288157184:android:8e12c4ee855599944d6ae5",
+        "android_client_info": {
+          "package_name": "com.example.dashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548288157184-4p72pojer8kp4j6p8hdro24gfbirr6ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQAR3yTQXsUOcKAPZuykbluDc3bHDmp-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548288157184-4p72pojer8kp4j6p8hdro24gfbirr6ja.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548288157184-5jqj45fidsfckid01su40fdmvt4sssv1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eup.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548288157184:android:6d7601b87d75dfc94d6ae5",
+        "android_client_info": {
+          "package_name": "eu.portal.ar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548288157184-lqic9fujfuvo1n2e8k7iri4j44si76lv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eu.portal.ar",
+            "certificate_hash": "f8c6ccf9286e681d491a39e79d9ea14b72ece77f"
+          }
+        },
+        {
+          "client_id": "548288157184-4p72pojer8kp4j6p8hdro24gfbirr6ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQAR3yTQXsUOcKAPZuykbluDc3bHDmp-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548288157184-4p72pojer8kp4j6p8hdro24gfbirr6ja.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548288157184-5jqj45fidsfckid01su40fdmvt4sssv1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eup.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
