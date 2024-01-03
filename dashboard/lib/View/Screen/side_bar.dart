@@ -1,5 +1,5 @@
 import 'package:dashboard/View/Screen/tabs/banner_ads_tab.dart';
-import 'package:dashboard/View/Screen/tabs/products/products_tab.dart';
+import 'package:dashboard/View/Screen/tabs/items/products_tab.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

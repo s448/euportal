@@ -1,4 +1,5 @@
 import 'package:dashboard/Controller/home_controller.dart';
+import 'package:dashboard/View/Screen/tabs/items/item_details.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -96,28 +97,31 @@ class GridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1 / 1.1,
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              item.logo ?? "",
-              fit: BoxFit.contain,
+    return InkWell(
+      onTap: () => Get.to(const ItemDetails(), arguments: {'item': item}),
+      child: AspectRatio(
+        aspectRatio: 1 / 1.1,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                item.logo ?? "",
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          const SizedBox(height: 6),
-          Center(
-            child: Text(
-              item.title ?? "",
-              style: StyleManager.headline,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-            ),
-          )
-        ],
+            const SizedBox(height: 6),
+            Center(
+              child: Text(
+                item.title ?? "",
+                style: StyleManager.headline,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
