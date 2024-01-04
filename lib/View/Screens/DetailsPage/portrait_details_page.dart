@@ -8,6 +8,7 @@ import 'package:eup/Service/location_service.dart';
 import 'package:eup/View/Widgets/Maps/location_viewer_page.dart';
 import 'package:eup/View/Widgets/PreferredWidgets/home_app_bar.dart';
 import 'package:eup/View/Widgets/details_info_item.dart';
+import 'package:eup/View/Widgets/product_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -158,39 +159,19 @@ class DetailsPage extends StatelessWidget {
                   itemCount: item.products?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     Product? product = item.products?[index];
-                    var productImgWidget = AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
-                            image: NetworkImage(product?.img ?? ""),
-                            fit: BoxFit.cover,
-                          ),
+                    return SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: GridTile(
+                        footer: Center(
+                          child: Text(product?.title ?? ""),
+                        ),
+                        child: Image.asset(
+                          product?.img ?? "",
+                          width: 50,
+                          height: 50,
                         ),
                       ),
-                    );
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () => showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  backgroundColor: Colors.transparent,
-                                  content: productImgWidget,
-                                );
-                              }),
-                          child: productImgWidget,
-                        ),
-                        const SizedBox(height: 3.0),
-                        Text(
-                          product?.title ?? "",
-                          style: StyleManager.info,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
                     );
                   },
                 ),

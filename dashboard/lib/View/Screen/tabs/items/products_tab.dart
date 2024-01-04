@@ -107,7 +107,7 @@ class GridItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
                 item.logo ?? "",
-                fit: BoxFit.contain,
+                fit: BoxFit.scaleDown,
               ),
             ),
             const SizedBox(height: 6),

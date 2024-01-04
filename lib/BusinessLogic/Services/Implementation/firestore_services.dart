@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_firestore_services.dart';
 import 'package:eup/Model/user_model.dart';
@@ -33,6 +35,17 @@ class FirestoreServices implements IFirestoreService {
           .set(userModel.toJson());
       return true;
     } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> deleteDocument(String docPath, String docId) async {
+    try {
+      await _firestore.collection(docPath).doc(docId).delete();
+      return true;
+    } catch (e) {
+      log(e.toString());
       return false;
     }
   }
