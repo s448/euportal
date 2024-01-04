@@ -1,3 +1,4 @@
+import 'package:dashboard/Controller/home_controller.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemDetails extends StatelessWidget {
-  const ItemDetails({super.key});
+  ItemDetails({super.key});
+  final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     final Item item = Get.arguments['item'];
@@ -374,7 +376,37 @@ class ItemDetails extends StatelessWidget {
             const SizedBox(width: 25),
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: () => showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        content: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: AlertDialog(
+                              title: const Text("Confirm delete this item ?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () async {
+                                    await controller.deleteItem(item.id ?? "");
+                                    Get.offAllNamed('/');
+                                    Get.snackbar("Delete Success", '');
+                                  },
+                                  child: const Text(
+                                    "Delete",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
                 child: Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(

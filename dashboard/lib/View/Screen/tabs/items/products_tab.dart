@@ -1,15 +1,23 @@
 import 'package:dashboard/Controller/home_controller.dart';
+import 'package:dashboard/View/Screen/tabs/items/add_item.dart';
 import 'package:dashboard/View/Screen/tabs/items/item_details.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
+import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/Model/search_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SearchItemsTab extends StatelessWidget {
+class SearchItemsTab extends StatefulWidget {
+  const SearchItemsTab({super.key});
+
+  @override
+  State<SearchItemsTab> createState() => _SearchItemsTabState();
+}
+
+class _SearchItemsTabState extends State<SearchItemsTab> {
   final controller = Get.put(HomeController());
 
-  SearchItemsTab({super.key});
   @override
   Widget build(BuildContext context) {
     return
@@ -58,16 +66,19 @@ class SearchItemsTab extends StatelessWidget {
                             itemCount: item.length + 1,
                             itemBuilder: (BuildContext context, int index) {
                               if (index == 0) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: ColorManager.primaryC,
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.add_business_outlined,
-                                      color: Colors.white,
-                                      size: 60,
+                                return InkWell(
+                                  onTap: () => showCategories(context),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: ColorManager.primaryC,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.add_business_outlined,
+                                        color: Colors.white,
+                                        size: 60,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -88,6 +99,60 @@ class SearchItemsTab extends StatelessWidget {
       );
     });
   }
+
+  Future<dynamic> showCategories(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text('Select Item type'),
+              content: SizedBox(
+                width: Get.width * 0.4,
+                height: Get.height * 0.2,
+                child: GridView(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    childAspectRatio: 1.5,
+                  ),
+                  shrinkWrap: true,
+                  children: List.generate(controller.categories?.length ?? 0,
+                      (index) {
+                    Category cat = controller.categories![index];
+                    return InkWell(
+                      onTap: () => Get.to(AddItem(
+                        itemType: cat,
+                      )),
+                      child: Container(
+                        width: Get.width * 0.3,
+                        height: Get.height * 0.05,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            8,
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: Text(
+                            cat.title ?? "",
+                            style: StyleManager.greenHeadline,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cancel'),
+                ),
+              ],
+            ));
+  }
 }
 
 class GridItem extends StatelessWidget {
@@ -98,7 +163,7 @@ class GridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(const ItemDetails(), arguments: {'item': item}),
+      onTap: () => Get.to(ItemDetails(), arguments: {'item': item}),
       child: AspectRatio(
         aspectRatio: 1 / 1.1,
         child: Column(
