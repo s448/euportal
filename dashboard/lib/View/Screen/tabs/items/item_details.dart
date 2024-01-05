@@ -1,4 +1,4 @@
-import 'package:dashboard/Controller/home_controller.dart';
+import 'package:dashboard/Controller/add_remove_items.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class ItemDetails extends StatelessWidget {
   ItemDetails({super.key});
-  final controller = Get.find<HomeController>();
+  final controller = Get.put(ItemsController());
   @override
   Widget build(BuildContext context) {
     final Item item = Get.arguments['item'];

@@ -1,6 +1,5 @@
-import 'dart:developer';
-
-import 'package:dashboard/Controller/home_controller.dart';
+// ignore_for_file: invalid_use_of_protected_member
+import 'package:dashboard/Controller/add_remove_items.dart';
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
 import 'package:eup/Core/Theme/colors.dart';
@@ -27,7 +26,7 @@ class _AddItemState extends State<AddItem> {
     controller.item.value.category = widget.itemType;
   }
 
-  final controller = Get.find<HomeController>();
+  final controller = Get.put(ItemsController());
   final homeCtrl = Get.find<HomePageController>();
 
   @override
@@ -45,6 +44,32 @@ class _AddItemState extends State<AddItem> {
           return SingleChildScrollView(
             child: Column(
               children: [
+                ///pick logo and portrait
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () => controller.pickLogo(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: controller.item.value.logo == null
+                            ? const Column(
+                                children: [
+                                  Icon(Icons.image),
+                                  Text(
+                                    "Pick logo",
+                                    style: StyleManager.greenHeadline,
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              )
+                            : Image.network(controller.item.value.logo ?? ""),
+                      ),
+                    )
+                  ],
+                ),
+
                 ///select country and city
 
                 Container(

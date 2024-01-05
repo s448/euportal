@@ -14,7 +14,6 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     categories = await getCategories();
-    regions = await getRegions();
     super.onInit();
   }
 
@@ -32,17 +31,5 @@ class HomeController extends GetxController {
   Stream<List<Item>> get portratStream => _services.portratStream();
   Stream<List<Item>> get logoStream => _services.logoStream();
 
-  deleteItem(String id) => _firestoreServices.deleteDocument("selection", id);
   getCategories() => _firestoreServices.getCategories();
-  getRegions() => _firestoreServices.getCategories();
-  saveItem() async {
-    var id = uuid.v1();
-    item.value.id = id;
-    if (await _firestoreServices.saveItem(item.value)) {
-      Get.snackbar("Item saved successfully", "");
-      Get.offAllNamed("/");
-    } else {
-      Get.snackbar("Failed to save item", "");
-    }
-  }
 }
