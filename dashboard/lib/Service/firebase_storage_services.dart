@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker_web/image_picker_web.dart';
@@ -5,8 +7,9 @@ import 'package:image_picker_web/image_picker_web.dart';
 class ImageUploadService {
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
-  Future<String?> uploadImage(String folder) async {
+  Future<String> uploadImage(String folder) async {
     try {
+      String url = '';
       Uint8List? image = await ImagePickerWeb.getImageAsBytes();
 
       if (image != null) {
@@ -14,15 +17,13 @@ class ImageUploadService {
         UploadTask task = ref.putData(image);
 
         await task.whenComplete(() async {
-          String downloadURL = await task.snapshot.ref.getDownloadURL();
-          print(downloadURL);
-          return downloadURL;
+          url = await task.snapshot.ref.getDownloadURL();
         });
       }
-
-      return null;
+      return url;
     } catch (e) {
-      return null;
+      log(e.toString());
+      return '';
     }
   }
 }

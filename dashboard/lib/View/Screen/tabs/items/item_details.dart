@@ -1,4 +1,5 @@
 import 'package:dashboard/Controller/add_remove_items.dart';
+import 'package:dashboard/View/Screen/tabs/items/add_item.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -357,23 +358,25 @@ class ItemDetails extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Row(
           children: [
-            Expanded(
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: ColorManager.primaryC,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      "Edit",
-                      textAlign: TextAlign.center,
-                      style: StyleManager.authButtonTextStyle,
-                    )),
-              ),
-            ),
-            const SizedBox(width: 25),
+            // Expanded(
+            //   child: InkWell(
+            //     onTap: () => Get.to(
+            //       AddItem(itemType: item,),
+            //     ),
+            //     child: Container(
+            //         padding: const EdgeInsets.all(20),
+            //         decoration: BoxDecoration(
+            //           color: ColorManager.primaryC,
+            //           borderRadius: BorderRadius.circular(8),
+            //         ),
+            //         child: const Text(
+            //           "Edit",
+            //           textAlign: TextAlign.center,
+            //           style: StyleManager.authButtonTextStyle,
+            //         )),
+            //   ),
+            // ),
+            // const SizedBox(width: 25),
             Expanded(
               child: InkWell(
                 onTap: () => showDialog(
