@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:dashboard/Service/firebase_storage_services.dart';
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
@@ -19,6 +19,10 @@ class ItemsController extends GetxController {
 
   Uuid uuid = const Uuid();
 
+  Rx<Uint8List> logo = Rx<Uint8List>(Uint8List(0));
+  Rx<Uint8List> portrait = Rx<Uint8List>(Uint8List(0));
+  Rx<Uint8List> productImage = Rx<Uint8List>(Uint8List(0));
+
   Rx<Item> item = Rx<Item>(Item(id: ''));
   List<Region>? regions;
   @override
@@ -31,6 +35,9 @@ class ItemsController extends GetxController {
   getCategories() => _firestoreServices.getCategories();
   getRegions() => _firestoreServices.getCategories();
   saveItem() async {
+    item.value.logo = await uploadImage(logo.value, 'logo');
+    item.value.portrait = await uploadImage(portrait.value, 'portrait');
+
     var id = uuid.v1();
     item.value.id = id;
     setLocationLat();
@@ -50,19 +57,22 @@ class ItemsController extends GetxController {
   final ImageUploadService _imageUploadService = ImageUploadService();
 
   pickPortrait() async {
-    item.value.portrait = await uploadImage('portrait');
+    portrait.value = await _imageUploadService.pickImage();
     update();
   }
 
   pickLogo() async {
-    item.value.logo = await uploadImage('logo');
+    logo.value = await _imageUploadService.pickImage();
     update();
-    log(item.value.logo.toString());
   }
 
   pickNewProductImage() async {
-    productImgUrl.value = await uploadImage('restaurant_products');
+    productImage.value = await _imageUploadService.pickImage();
     update();
+  }
+
+  Future<String?> uploadImage(Uint8List image, String folder) async {
+    return await _imageUploadService.uploadImage(image, folder);
   }
 
   ///location lat & long
@@ -73,10 +83,13 @@ class ItemsController extends GetxController {
   RxString productImgUrl = ''.obs;
   RxString productTitle = ''.obs;
 
-  addProduct() {
+  addProduct() async {
+    productImgUrl.value =
+        (await uploadImage(productImage.value, 'restaurant_products')) ?? '';
     products?.value.add(
       Product(img: productImgUrl.value, title: productTitle.value),
     );
+    productImage.value = Uint8List(0);
     productImgUrl.value = '';
     productTitle.value = '';
     update();
@@ -88,17 +101,9 @@ class ItemsController extends GetxController {
   setLocationLat() =>
       item.value.location = ItemLocation(lat: lat.value, long: long.value);
 
-  Future<String> uploadImage(String folder) =>
-      _imageUploadService.uploadImage(folder);
-
   isRestaurantOrCoffeeShop() =>
       item.value.category?.id == "4" || item.value.category?.id == "1";
 
   isMosque() => item.value.category?.id == "2";
   isDr() => item.value.category?.id == "3";
 }
-// final isRestaurantOrCoffeShop =
-//     item.category?.id == "1" || item.category?.id == "4";
-
-// final isMosque = item.category?.id == "2";
-// final isDr = item.category?.id == "3";

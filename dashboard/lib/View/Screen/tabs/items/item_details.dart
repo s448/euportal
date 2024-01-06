@@ -1,5 +1,4 @@
 import 'package:dashboard/Controller/add_remove_items.dart';
-import 'package:dashboard/View/Screen/tabs/items/add_item.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';

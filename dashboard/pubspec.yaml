@@ -38,6 +38,7 @@ dependencies:
   firebase_storage: ^11.6.0
   image_picker_web: ^3.1.1
   google_maps_flutter: ^2.5.1
+  icons_launcher: ^2.1.6
 
 dev_dependencies:
   flutter_test:
@@ -50,10 +51,16 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
+icons_launcher:
+  image_path: "assets/app-header.png"
+  platforms:
+    web:
+      enable: true
+    android:
+      enable: true
+    ios:
+      enable: true
 
   # example:
   # fonts:

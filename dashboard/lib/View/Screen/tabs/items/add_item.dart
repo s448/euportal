@@ -1,4 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
+import 'dart:typed_data';
+
 import 'package:dashboard/Controller/add_remove_items.dart';
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Constant/image_path.dart';
@@ -8,6 +10,7 @@ import 'package:eup/Model/region_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_region_model.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';
 import 'package:eup/View/Widgets/product_grid_tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -45,60 +48,41 @@ class _AddItemState extends State<AddItem> {
         return Padding(
           padding: const EdgeInsets.all(20.0),
           child: Obx(() {
-            var pickLogo = SizedBox(
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  InkWell(
-                    onTap: () => controller.pickLogo(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8),
+            var pickLogo = InkWell(
+              onTap: () => controller.pickLogo(),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: controller.logo.value.isNotEmpty
+                    ? Column(
+                        children: [
+                          Image.memory(
+                            controller.logo.value,
+                            width: 60,
+                            height: 60,
+                          ),
+                          IconButton(
+                              onPressed: () =>
+                                  controller.logo.value = Uint8List(0),
+                              icon: const Icon(
+                                CupertinoIcons.delete,
+                                color: Colors.red,
+                              ))
+                        ],
+                      )
+                    : const Column(
+                        children: [
+                          Icon(Icons.image),
+                          Text(
+                            "Pick logo",
+                            style: StyleManager.greenHeadline,
+                            textAlign: TextAlign.center,
+                          )
+                        ],
                       ),
-                      child: controller.item.value.logo != '' &&
-                              controller.item.value.logo != null
-                          ? Image.network(
-                              controller.item.value.logo.toString(),
-                            )
-                          : const Column(
-                              children: [
-                                Icon(Icons.image),
-                                Text(
-                                  "Pick logo",
-                                  style: StyleManager.greenHeadline,
-                                  textAlign: TextAlign.center,
-                                )
-                              ],
-                            ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => controller.pickPortrait(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: controller.item.value.portrait != '' &&
-                              controller.item.value.portrait != null
-                          ? Image.network(
-                              controller.item.value.portrait.toString(),
-                            )
-                          : const Column(
-                              children: [
-                                Icon(Icons.image),
-                                Text(
-                                  "Pick portrait",
-                                  style: StyleManager.greenHeadline,
-                                  textAlign: TextAlign.center,
-                                )
-                              ],
-                            ),
-                    ),
-                  )
-                ],
               ),
             );
             var productsAddRemove = Obx(() {
@@ -138,32 +122,60 @@ class _AddItemState extends State<AddItem> {
                                                 .pickNewProductImage(),
                                             child: Obx(() {
                                               return Container(
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                                child: !controller.productImgUrl
-                                                        .value.isURL
-                                                    ? const Column(
-                                                        children: [
-                                                          Icon(Icons.image),
-                                                          Text(
-                                                            "Pick product image",
-                                                            style: StyleManager
-                                                                .greenHeadline,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Image.network(
-                                                        controller
-                                                            .productImgUrl.value
-                                                            .toString(),
-                                                      ),
-                                              );
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  child: controller.productImage
+                                                          .value.isEmpty
+                                                      ? const Column(
+                                                          children: [
+                                                            Icon(Icons.image),
+                                                            Text(
+                                                              "Pick product image",
+                                                              style: StyleManager
+                                                                  .greenHeadline,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ),
+                                                          ],
+                                                        )
+                                                      : Stack(
+                                                          children: [
+                                                            Image.memory(
+                                                              controller
+                                                                  .productImage
+                                                                  .value,
+                                                              width: Get.width *
+                                                                  0.25,
+                                                              height:
+                                                                  Get.height *
+                                                                      0.3,
+                                                            ),
+                                                            Positioned(
+                                                              child: IconButton(
+                                                                onPressed: () =>
+                                                                    controller
+                                                                            .productImage
+                                                                            .value =
+                                                                        Uint8List(
+                                                                            0),
+                                                                icon: const Icon(
+                                                                    CupertinoIcons
+                                                                        .delete),
+                                                                color:
+                                                                    Colors.red,
+                                                                iconSize: 50,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ));
                                             }),
                                           ),
                                           const SizedBox(height: 10),
@@ -232,8 +244,58 @@ class _AddItemState extends State<AddItem> {
               child: Column(
                 children: [
                   ///pick logo and portrait
-                  if (controller.isRestaurantOrCoffeeShop()) pickLogo,
-
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      if (controller.isRestaurantOrCoffeeShop()) pickLogo,
+                      SizedBox(
+                        // height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            InkWell(
+                              onTap: () => controller.pickPortrait(),
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: controller.portrait.value.isNotEmpty
+                                    ? Column(
+                                        children: [
+                                          Image.memory(
+                                            controller.portrait.value,
+                                            width: 60,
+                                            height: 100,
+                                          ),
+                                          IconButton(
+                                              onPressed: () => controller
+                                                  .portrait
+                                                  .value = Uint8List(0),
+                                              icon: const Icon(
+                                                CupertinoIcons.delete,
+                                                color: Colors.red,
+                                              ))
+                                        ],
+                                      )
+                                    : const Column(
+                                        children: [
+                                          Icon(Icons.image),
+                                          Text(
+                                            "Pick portrait",
+                                            style: StyleManager.greenHeadline,
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
+                                      ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 25),
 
                   ///select country and city
@@ -422,6 +484,26 @@ class _AddItemState extends State<AddItem> {
                         onChanged: (v) =>
                             controller.item.value.workingHours = v,
                         initialValue: controller.item.value.workingHours,
+                      ),
+                    ),
+                  const SizedBox(height: 12),
+
+                  ///phone
+                  if (!controller.isMosque())
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          filled: true,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          hintText: "Phone",
+                        ),
+                        onChanged: (v) => controller.item.value.phone = v,
+                        initialValue: controller.item.value.phone,
                       ),
                     ),
                   const SizedBox(height: 12),
@@ -669,16 +751,17 @@ class _AddItemState extends State<AddItem> {
                   const SizedBox(height: 50),
 
                   ///add products
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Add item products: ",
-                        style: StyleManager.headline,
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
+                  if (controller.isRestaurantOrCoffeeShop())
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Add item products: ",
+                          style: StyleManager.headline,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
                   if (controller.isRestaurantOrCoffeeShop()) productsAddRemove,
                 ],
               ),
