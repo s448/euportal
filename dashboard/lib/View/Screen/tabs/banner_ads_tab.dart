@@ -1,5 +1,6 @@
 import 'package:dashboard/Controller/home_controller.dart';
 import 'package:dashboard/View/Widget/banner_ad_grid_tile.dart';
+import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Model/carousel_banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,11 +42,30 @@ class BannerAdsTab extends StatelessWidget {
                           mainAxisSpacing: 8.0,
                           childAspectRatio: 1 / 1.2,
                         ),
-                        itemCount: banners.length,
+                        itemCount: banners.length + 1,
                         itemBuilder: (BuildContext context, int index) {
-                          return BannerAdGridTile(
-                            bannerAd: banners[index],
-                          );
+                          if (index == 0) {
+                            return InkWell(
+                              // onTap: () => Get.to(),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: ColorManager.primaryC,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.add_location,
+                                    color: Colors.white,
+                                    size: 60,
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return BannerAdGridTile(
+                              bannerAd: banners[index - 1],
+                            );
+                          }
                         },
                       ),
                     );

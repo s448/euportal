@@ -7,6 +7,7 @@ abstract class IhomePageServices {
   Future<String> getSearchResult(String q);
   Future<List<Category>> getSearchCategories();
   Future<List<Region>> getRegions();
+
   Stream<List<Item>> portratStream();
   Stream<List<Item>> logoStream();
   Stream<List<Item>> filterStream(String country, String city, String category);

@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 
 class ItemsController extends GetxController {
   final IFirestoreService _firestoreServices = FirestoreServices();
-  final mainAppCtrl = Get.find<HomePageController>();
+  // final mainAppCtrl = Get.find<HomePageController>();
 
   Uuid uuid = const Uuid();
 

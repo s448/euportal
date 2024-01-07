@@ -25,11 +25,10 @@ class HomeController extends GetxController {
 
   final IhomePageServices _services = HomePageServices();
   final IFirestoreService _firestoreServices = FirestoreServices();
-  final mainAppCtrl = Get.find<HomePageController>();
 
   Stream<List<CarouselBanner>> get carouselStream => _services.carouselStream();
   Stream<List<Item>> get portratStream => _services.portratStream();
-  Stream<List<Item>> get logoStream => _services.logoStream();
+  // Stream<List<Item>> get logoStream => _services.logoStream();
 
   getCategories() => _firestoreServices.getCategories();
 }

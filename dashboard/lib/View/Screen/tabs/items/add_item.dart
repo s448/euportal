@@ -31,7 +31,7 @@ class _AddItemState extends State<AddItem> {
   }
 
   final controller = Get.put(ItemsController());
-  final homeCtrl = Get.find<HomePageController>();
+  final homeCtrl = Get.put(HomePageController());
 
   @override
   Widget build(BuildContext context) {

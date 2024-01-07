@@ -1,6 +1,7 @@
 import 'package:dashboard/Controller/home_controller.dart';
 import 'package:dashboard/View/Screen/tabs/items/add_item.dart';
 import 'package:dashboard/View/Screen/tabs/items/item_details.dart';
+import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_complex_datatypes/item_type_model.dart';

@@ -23,7 +23,8 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomePageController(), permanent: true);
+    // Get.put(HomePageController());
+
     return GetMaterialApp(
       title: "EU portal Dashboard",
       textDirection: TextDirection.ltr,

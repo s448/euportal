@@ -20,7 +20,7 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() async {
-    await getLocation();
+    // await getLocation();
     categories.value = await getCategories();
     regions.value = await getRegions();
     super.onInit();
@@ -137,10 +137,10 @@ class HomePageController extends GetxController {
   // Item? viewedItem;
   incrementViewStackIndex() {
     //this method set the view model to details page which it's index is 1
-    viewIndex.value ++;
+    viewIndex.value++;
   }
 
   decrementViewIndex() {
-    viewIndex.value --;
+    viewIndex.value--;
   }
 }

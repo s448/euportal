@@ -1,4 +1,5 @@
 import 'package:dashboard/View/Screen/tabs/banner_ads_tab.dart';
+import 'package:dashboard/View/Screen/tabs/regions/countries_cities.dart';
 import 'package:dashboard/View/Screen/tabs/items/products_tab.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,6 +71,10 @@ class _SideBarPageState extends State<SideBarPage> {
                   icon: Icons.notification_add_outlined,
                   label: 'Notifications',
                 ),
+                SidebarXItem(
+                  icon: Icons.edit_location_sharp,
+                  label: 'Countries&Cities',
+                ),
               ],
             ),
           ),
@@ -100,13 +105,11 @@ class SideBarBody extends StatelessWidget {
       builder: (context, child) {
         switch (controller.selectedIndex) {
           case 0:
-            return SearchItemsTab();
+            return const SearchItemsTab();
           case 1:
             return BannerAdsTab();
-          // case 3:
-          //   return UsersTab(controller: usersController);
-          // case 4:
-          //   return UsersTab(controller: usersController);
+          case 3:
+            return CountriesAndCitiesTab();
           default:
             return const SizedBox();
         }
