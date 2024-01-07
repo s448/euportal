@@ -1,3 +1,4 @@
+import 'package:dashboard/Controller/ad_banners_controller.dart';
 import 'package:dashboard/Controller/home_controller.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
@@ -9,6 +10,7 @@ class BannerAdGridTile extends StatelessWidget {
   BannerAdGridTile({super.key, required this.bannerAd});
   final CarouselBanner bannerAd;
   final controller = Get.find<HomeController>();
+  final bannerController = Get.put(AdBannersController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +20,7 @@ class BannerAdGridTile extends StatelessWidget {
         ),
         border: Border.all(color: ColorManager.primaryC),
       ),
-      // height: Get.height * 0.6,primaryColorLight
+      height: Get.height * 0.3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,13 +70,16 @@ class BannerAdGridTile extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                "Delete",
-                style: StyleManager.headline,
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () =>
+                    bannerController.deleteBanner(bannerAd.id ?? ""),
+                child: const Text(
+                  "Delete",
+                  style: StyleManager.headline,
+                ),
               ),
             ),
           )

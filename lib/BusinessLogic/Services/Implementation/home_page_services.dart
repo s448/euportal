@@ -45,7 +45,7 @@ class HomePageServices implements IhomePageServices {
   }
 
   @override
-  Stream<List<Item>> portratStream() => FirebaseFirestore.instance
+  Stream<List<Item>> portratStream() => _firestore
       .collection('selection')
       .where('featured_portrait', isEqualTo: true)
       .snapshots()
@@ -53,7 +53,7 @@ class HomePageServices implements IhomePageServices {
           snapshot.docs.map((doc) => Item.fromJson(doc.data())).toList());
 
   @override
-  Stream<List<Item>> logoStream() => FirebaseFirestore.instance
+  Stream<List<Item>> logoStream() => _firestore
       .collection('selection')
       .where('featured_logo', isEqualTo: true)
       .snapshots()
@@ -63,7 +63,7 @@ class HomePageServices implements IhomePageServices {
   @override
   Stream<List<Item>> filterStream(
           String country, String city, String category) =>
-      FirebaseFirestore.instance
+      _firestore
           .collection('selection')
           .where('region.country', isEqualTo: country)
           .where('region.city', isEqualTo: city)
@@ -73,7 +73,7 @@ class HomePageServices implements IhomePageServices {
               snapshot.docs.map((doc) => Item.fromJson(doc.data())).toList());
 
   @override
-  Stream<List<CarouselBanner>> carouselStream() => FirebaseFirestore.instance
+  Stream<List<CarouselBanner>> carouselStream() => _firestore
       .collection('carousel')
       .snapshots()
       .map((snapshot) => snapshot.docs

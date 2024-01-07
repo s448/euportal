@@ -1,4 +1,5 @@
 import 'package:dashboard/View/Screen/login_page.dart';
+import 'package:dashboard/View/Screen/side_bar.dart';
 import 'package:dashboard/firebase_options.dart';
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
@@ -28,7 +29,7 @@ class Dashboard extends StatelessWidget {
       textDirection: TextDirection.ltr,
       debugShowCheckedModeBanner: false,
       theme: StyleManager.themeManager,
-      home: LoginPage(),
+      home: SideBarPage(),
       // getPages: getPages,
     );
   }

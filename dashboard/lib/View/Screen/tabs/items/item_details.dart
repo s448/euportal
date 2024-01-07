@@ -35,7 +35,11 @@ class ItemDetails extends StatelessWidget {
                   Row(
                     children: [
                       const RowTitle(t: "Logo: "),
-                      Image.network(item.logo ?? "")
+                      Image.network(
+                        item.logo ?? "",
+                        width: 80,
+                        height: 100,
+                      )
                     ],
                   ),
                   isRestaurantOrCoffeShop
@@ -45,7 +49,11 @@ class ItemDetails extends StatelessWidget {
                             SizedBox(
                                 width: 150,
                                 height: 200,
-                                child: Image.network(item.portrait ?? ""))
+                                child: Image.network(
+                                  item.portrait ?? "",
+                                  width: 80,
+                                  height: 100,
+                                ))
                           ],
                         )
                       : const SizedBox(),

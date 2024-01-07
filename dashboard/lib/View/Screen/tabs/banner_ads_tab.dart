@@ -39,6 +39,7 @@ class BannerAdsTab extends StatelessWidget {
                           crossAxisCount: crossAxisCount,
                           crossAxisSpacing: 8.0,
                           mainAxisSpacing: 8.0,
+                          childAspectRatio: 1 / 1.2,
                         ),
                         itemCount: banners.length,
                         itemBuilder: (BuildContext context, int index) {
