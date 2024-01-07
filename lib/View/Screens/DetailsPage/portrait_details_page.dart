@@ -8,7 +8,6 @@ import 'package:eup/Service/location_service.dart';
 import 'package:eup/View/Widgets/Maps/location_viewer_page.dart';
 import 'package:eup/View/Widgets/PreferredWidgets/home_app_bar.dart';
 import 'package:eup/View/Widgets/details_info_item.dart';
-import 'package:eup/View/Widgets/product_grid_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';

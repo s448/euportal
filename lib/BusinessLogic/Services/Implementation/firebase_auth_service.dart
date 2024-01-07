@@ -217,4 +217,29 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
         await _auth.signInWithCredential(credential);
     return userCredential;
   }
+
+  @override
+  signInAsAdmin({required String email, required String password}) async {
+    try {
+      var userCredentials = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      if (userCredentials.user?.email == "eu.gate.ar@gmail.com") {
+        return true;
+      } else {
+        Get.snackbar("User not authorized", '');
+        return false;
+      }
+    } on FirebaseAuthException catch (e) {
+      log(e.toString());
+      String errorMessage =
+          FirebaseAuthErrorHandler.mapFirebaseAuthExceptionToMessage(e);
+      Get.snackbar('خطأ', errorMessage, snackPosition: SnackPosition.BOTTOM);
+      return false;
+    } catch (e) {
+      Get.snackbar('خطأ', 'حدث خطأ غير متوقع',
+          snackPosition: SnackPosition.BOTTOM);
+      return false;
+    }
+  }
 }

@@ -15,8 +15,8 @@ class ProductGridTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       child: SizedBox(
-        width: 50,
-        height: 60,
+        width: 80,
+        height: 80,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -33,7 +33,7 @@ class ProductGridTile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                             image: DecorationImage(
                               image: NetworkImage(product?.img ?? ""),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
@@ -44,13 +44,13 @@ class ProductGridTile extends StatelessWidget {
                 product?.img ?? "",
                 width: 50,
                 height: 42,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 3.0),
             Text(
               product?.title ?? "",
-              style: StyleManager.info,
+              style: StyleManager.hintStyle,
               textAlign: TextAlign.center,
             ),
           ],

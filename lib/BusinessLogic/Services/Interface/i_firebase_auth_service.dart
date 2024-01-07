@@ -21,4 +21,5 @@ abstract class IFirebaseAuthService {
   Future<bool> signInUsingFacebook();
 
   Future<bool> signInUsingGoogle();
+  Future<bool> signInAsAdmin({required String email, required String password});
 }
