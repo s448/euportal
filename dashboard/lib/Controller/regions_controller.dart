@@ -1,7 +1,5 @@
-import 'package:eup/BusinessLogic/Services/Implementation/home_page_services.dart';
 import 'package:eup/BusinessLogic/Services/Implementation/region_services_implemntation.dart';
 
-import 'package:eup/BusinessLogic/Services/Interface/i_home_page_services.dart';
 import 'package:eup/BusinessLogic/Services/Interface/i_region_services.dart';
 
 import 'package:eup/Model/region_model.dart';

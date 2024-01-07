@@ -64,6 +64,7 @@ class LoginPage extends StatelessWidget {
             hintStyle: StyleManager.hintStyle,
             fillColor: ColorManager.containerBackgroundC,
           ),
+          obscureText: true,
           validator: (val) {
             if (val!.isEmpty) {
               return "حقل فارغ";

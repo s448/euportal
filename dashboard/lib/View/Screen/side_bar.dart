@@ -1,4 +1,4 @@
-import 'package:dashboard/View/Screen/tabs/banner_ads_tab.dart';
+import 'package:dashboard/View/Screen/tabs/banner_ads/banner_ads_tab.dart';
 import 'package:dashboard/View/Screen/tabs/regions/countries_cities.dart';
 import 'package:dashboard/View/Screen/tabs/items/products_tab.dart';
 import 'package:eup/Core/Theme/colors.dart';

@@ -1,4 +1,5 @@
 import 'package:dashboard/Controller/home_controller.dart';
+import 'package:dashboard/View/Screen/tabs/banner_ads/add_banner_page.dart';
 import 'package:dashboard/View/Widget/banner_ad_grid_tile.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Model/carousel_banner_model.dart';
@@ -46,7 +47,7 @@ class BannerAdsTab extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           if (index == 0) {
                             return InkWell(
-                              // onTap: () => Get.to(),
+                              onTap: () => Get.to(AddBannerPage()),
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: ColorManager.primaryC,

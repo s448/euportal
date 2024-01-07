@@ -1,4 +1,5 @@
 import 'package:dashboard/Controller/add_remove_items.dart';
+import 'package:dashboard/View/Screen/side_bar.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:eup/Model/search_item_model.dart';
@@ -403,7 +404,7 @@ class ItemDetails extends StatelessWidget {
                                 TextButton(
                                   onPressed: () async {
                                     await controller.deleteItem(item.id ?? "");
-                                    Get.offAllNamed('/');
+                                    Get.offAll(const SideBarPage());
                                     Get.snackbar("Delete Success", '');
                                   },
                                   child: const Text(
