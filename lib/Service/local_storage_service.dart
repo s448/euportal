@@ -38,5 +38,5 @@ class SharedPreferencesService {
   }
 
   ///is user authenticated
-  isUserLoggedInAndRemembered() => getBool('remember_me');
+  isUserLoggedInAndRemembered() => getBool('remember_me') ?? false;
 }

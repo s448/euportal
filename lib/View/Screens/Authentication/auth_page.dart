@@ -399,15 +399,15 @@ class SignUpPage extends StatelessWidget {
                                 height: Get.height * 0.06,
                               ),
                             ),
-                            const SizedBox(width: 7),
-                            InkWell(
-                              onTap: () => controller.signInUsingTwitter(),
-                              child: Image.asset(
-                                authX,
-                                width: Get.width * 0.08,
-                                height: Get.height * 0.06,
-                              ),
-                            ),
+                            // const SizedBox(width: 7),
+                            // InkWell(
+                            //   onTap: () => controller.signInUsingTwitter(),
+                            //   child: Image.asset(
+                            //     authX,
+                            //     width: Get.width * 0.08,
+                            //     height: Get.height * 0.06,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(height: 6),

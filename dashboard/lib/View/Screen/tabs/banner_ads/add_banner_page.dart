@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:dashboard/Controller/ad_banners_controller.dart';
-import 'package:dashboard/Controller/regions_controller.dart';
 import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Core/Theme/style_manager.dart';
 import 'package:flutter/cupertino.dart';

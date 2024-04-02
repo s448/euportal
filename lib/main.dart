@@ -32,7 +32,7 @@ class EupApp extends StatelessWidget {
       textDirection: TextDirection.rtl,
       debugShowCheckedModeBanner: false,
       theme: StyleManager.themeManager,
-      home: userController.isUserAuthenticated() == false
+      home: userController.isUserAuthenticated() == true
           ? const NavBar()
           : SignUpPage(),
       getPages: getPages,
