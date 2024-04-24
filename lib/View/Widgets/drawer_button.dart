@@ -6,7 +6,7 @@ class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(ctx) {
+  Widget build(context) {
     return Builder(
       builder: (context) => IconButton(
         icon: Padding(

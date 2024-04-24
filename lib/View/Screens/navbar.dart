@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
       backgroundColor: ColorManager.backgroundColor,
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+          true, // This should be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
@@ -94,7 +94,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       textStyle: const TextStyle(
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w400,
         color: ColorManager.secondaryC,
       ),
       activeColorSecondary: ColorManager.primaryC,
@@ -112,7 +112,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       textStyle: const TextStyle(
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w400,
         color: ColorManager.secondaryC,
       ),
       activeColorSecondary: ColorManager.primaryC,
@@ -130,7 +130,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       textStyle: const TextStyle(
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w400,
         color: ColorManager.secondaryC,
       ),
       activeColorSecondary: ColorManager.primaryC,
@@ -139,7 +139,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
         imgPath: home,
         color: ColorManager.primaryC,
       ),
-      title: 'الإشعارات',
+      title: 'الرئيسية',
       inactiveIcon: const NavBarItemIcon(
         imgPath: home,
         color: ColorManager.secondaryC,
@@ -148,7 +148,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       textStyle: const TextStyle(
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w400,
         color: ColorManager.secondaryC,
       ),
       activeColorSecondary: ColorManager.primaryC,
@@ -166,7 +166,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       textStyle: const TextStyle(
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w400,
         color: ColorManager.secondaryC,
       ),
       activeColorSecondary: ColorManager.primaryC,

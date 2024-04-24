@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:eup/BusinessLogic/Controller/home_page_controller.dart';
+import 'package:eup/Core/Theme/colors.dart';
 import 'package:eup/Model/search_item_model.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/mosque_&_dr/list_tile_item_widget.dart';
 import 'package:eup/View/Widgets/HomePageWidgets/restaurant_&_coffee_shop/portrait_widget.dart';
@@ -23,7 +24,25 @@ class FilterResultsView extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('لا يوجد نتائج'));
+              return Center(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 10),
+                  const Text('لا يوجد نتائج'),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () => controller.resetMode(),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(ColorManager.primaryC),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                    ),
+                    child: const Text("العودة الى الصفحة الرئيسية"),
+                  ),
+                ],
+              ));
             } else {
               List<Item> items = snapshot.data!;
               return controller.isGridView()

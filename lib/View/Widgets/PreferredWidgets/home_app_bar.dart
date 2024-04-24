@@ -12,13 +12,14 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return AppBar(
+      return SliverAppBar(
         title: Text(
           homeCtrl.getAppTitle(),
           style: StyleManager.headline,
         ),
         centerTitle: homeCtrl.isCenterTitle(),
         elevation: 0.0,
+        pinned: true,
 
         ///if the view index is 0 then it's at [home page]
         ///[home page] can be at 2 states : 1-with filter 2-with best of results

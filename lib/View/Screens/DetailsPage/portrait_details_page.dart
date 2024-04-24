@@ -26,11 +26,15 @@ class DetailsPage extends StatelessWidget {
 
     // final item = controller.viewedItem;
     return Scaffold(
+      endDrawer: const Drawer(
+        child: SizedBox(),
+      ),
       body: SizedBox(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              MainAppBar(),
+        child: CustomScrollView(
+          slivers: [
+            MainAppBar(),
+            SliverList(
+                delegate: SliverChildListDelegate([
               Stack(
                 alignment: Alignment.topCenter,
                 children: [
@@ -175,8 +179,8 @@ class DetailsPage extends StatelessWidget {
                   },
                 ),
               ),
-            ],
-          ),
+            ]))
+          ],
         ),
       ),
       floatingActionButton: Column(
