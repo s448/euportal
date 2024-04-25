@@ -33,6 +33,7 @@ dependencies:
   twitter_login: ^4.4.2
   flutter_facebook_auth: ^6.0.3
   google_sign_in: ^6.2.1
+  flutter_polyline_points: ^2.0.0
   
 
 dev_dependencies:

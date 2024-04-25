@@ -10,6 +10,7 @@ import 'package:eup/View/Widgets/PreferredWidgets/home_app_bar.dart';
 import 'package:eup/View/Widgets/details_info_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -218,9 +219,13 @@ class DetailsPage extends StatelessWidget {
           FloatingActionButton(
             heroTag: "directions",
             onPressed: () {
+              controller.viewIndex.value = 0;
               pushNewScreen(context,
                   withNavBar: true,
-                  screen: GoogleMapsPage(latitude: lat, longitude: long));
+                  screen: const GoogleMapsPage(
+                    // source: LatLng(37.7749, -122.4194),
+                    destination: LatLng(30.7910, 31.4029),
+                  ));
             },
             shape: const CircleBorder(),
             backgroundColor: ColorManager.blueC,

@@ -10,6 +10,12 @@ class StyleManager {
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
     fontFamily: font,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: ColorManager.primaryC,
+      secondary: ColorManager.primaryC,
+      // onPrimary: ColorManager.secondaryC,
+      // surface: Colors.red,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorManager.backgroundColor,
     ),

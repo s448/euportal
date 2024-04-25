@@ -31,8 +31,9 @@ class _NavBarState extends State<NavBar> {
       screens: pages,
       items: _navBarsItems(),
       confineInSafeArea: true,
+      popAllScreensOnTapAnyTabs: true,
       backgroundColor: ColorManager.backgroundColor,
-      handleAndroidBackButtonPress: true, // Default is true.
+      handleAndroidBackButtonPress: false, // Default is true.
       resizeToAvoidBottomInset:
           true, // This should be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
