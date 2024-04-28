@@ -30,12 +30,12 @@ class FirestoreServices implements IFirestoreService {
   }
 
   @override
-  Future<bool> saveUserData(UserModel userModel) async {
+  Future<bool> saveUserData(UserModel userModel, String id) async {
     try {
-      await _firestore
-          .collection('users')
-          .doc(userModel.id)
-          .set(userModel.toJson());
+      await _firestore.collection('users').doc(id).set({
+        ...userModel.toJson(),
+        'id': id,
+      });
       return true;
     } catch (e) {
       return false;
@@ -97,6 +97,23 @@ class FirestoreServices implements IFirestoreService {
     } catch (e) {
       log(e.toString());
       return false;
+    }
+  }
+
+  @override
+  Future<UserModel> getUserData(String id) async {
+    try {
+      DocumentSnapshot docSnapshot =
+          await _firestore.collection('users').doc(id).get();
+
+      if (docSnapshot.exists) {
+        return UserModel.fromJson(docSnapshot as Map<String, dynamic>);
+      } else {
+        return UserModel();
+      }
+    } catch (e) {
+      log('Error getting user data: $e');
+      return UserModel();
     }
   }
 }

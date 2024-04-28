@@ -45,11 +45,12 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
       {required UserModel user, required String password}) async {
     try {
       ///create a new user with these email and password
-      await _auth.createUserWithEmailAndPassword(
+      var credentials = await _auth.createUserWithEmailAndPassword(
           email: user.email ?? "", password: password);
 
       ///save user info to the firestore with
-      if (await _firestore.saveUserData(user)) {
+      if (await _firestore.saveUserData(
+          user, credentials.additionalUserInfo?.providerId ?? "")) {
         return true;
       } else {
         return false;
@@ -109,13 +110,15 @@ class FirebaseAuthServiceImplementation implements IFirebaseAuthService {
           // success
           ///save user data to firestore
           var usr = authResult.user;
-          if (await _firestore.saveUserData(UserModel(
-            email: usr?.email,
-            firstName: usr?.name,
-            id: usr!.id.toString(),
-            profile: usr.thumbnailImage,
-            token: "",
-          ))) {
+          if (await _firestore.saveUserData(
+              UserModel(
+                email: usr?.email,
+                firstName: usr?.name,
+                id: usr!.id.toString(),
+                profile: usr.thumbnailImage,
+                token: "",
+              ),
+              usr.id.toString())) {
             return true;
           } else {
             return false;

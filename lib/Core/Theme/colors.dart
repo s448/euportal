@@ -10,6 +10,7 @@ class ColorManager {
   static const greyC = Color.fromRGBO(33, 36, 54, 0.5);
   static const textC = Color.fromRGBO(33, 36, 54, 1);
   static const containerBackgroundC = Color.fromRGBO(74, 176, 23, 0.05);
+  static const dropDownButtonColor = Color.fromRGBO(84, 87, 82, 0.047);
 
   // //sections colors
   static const navbarSelected = Colors.green;

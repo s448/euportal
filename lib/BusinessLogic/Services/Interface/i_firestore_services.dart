@@ -6,7 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IFirestoreService {
   Future<bool> registerUser(User user);
-  Future<bool> saveUserData(UserModel userModel);
+  Future<bool> saveUserData(UserModel userModel, String id);
+  Future<UserModel> getUserData(String id);
   Future<bool> deleteDocument(String docPath, String docId);
   Future<List<Category>> getCategories();
   Future<List<Region>> getRegions();

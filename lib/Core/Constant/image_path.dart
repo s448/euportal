@@ -46,6 +46,12 @@ const helpCenter = "assets/icons/settings/help_center.svg";
 const rateUs = "assets/icons/settings/rate_us.svg";
 const whoWeAre = "assets/icons/settings/who_we_are.svg";
 
+//profile page
+const profilePerson = "assets/icons/profile/profile_person.svg";
+const profileInsta = "assets/icons/profile/profile_insta.png";
+const profilePassword = "assets/icons/profile/profile_password.svg";
+const profileLocation = "assets/icons/profile/profile_location.svg";
+
 //social media auth buttons
 const authFb = "assets/icons/fbb.png";
 const authGoogle = "assets/icons/gb.png";

@@ -53,9 +53,10 @@ flutter:
     - assets/navbar/unactive/
     - assets/svg/
     - assets/icons/settings/
+    - assets/icons/profile/
 
   fonts:
     - family: font
       fonts:
         - weight: 100
-        - asset: assets/fonts/font.ttf
+        - asset: assets/fonts/basic.ttf

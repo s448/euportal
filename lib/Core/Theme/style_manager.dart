@@ -77,7 +77,7 @@ class StyleManager {
   );
 
   static BoxDecoration dropDownButtonDecoration = BoxDecoration(
-    color: ColorManager.containerBackgroundC,
+    color: ColorManager.dropDownButtonColor,
     borderRadius: BorderRadius.circular(10),
   );
 
@@ -105,6 +105,13 @@ class StyleManager {
 
   static const smallSizedHint = TextStyle(
     color: ColorManager.secondaryC,
+    fontSize: smallSize,
+    fontFamily: font,
+    fontWeight: FontWeight.w200,
+  );
+
+  static const smallSizedGreenHint = TextStyle(
+    color: ColorManager.primaryC,
     fontSize: smallSize,
     fontFamily: font,
     fontWeight: FontWeight.w200,
